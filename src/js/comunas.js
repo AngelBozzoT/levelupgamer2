@@ -16,7 +16,10 @@ const regionesDeChile = [
     {
         id: "reg_metropolitana",
         nombre: "Región Metropolitana de Santiago",
-        comunas: ["Santiago", "Providencia", "Las Condes", "Maipú", "Puente Alto", "La Florida", "San Bernardo", "Ñuñoa", "Pudahuel"]
+        comunas: ["Las Condes","Vitacura","Providencia","La Reina","Lo Barnechea","Ñuñoa","La Florida","La Pintana",
+                "Puente Alto","San Bernardo","La Granja","San Ramón","El Bosque","La Cisterna","San Joaquín",
+                "San Miguel","Pedro Aguirre Cerda","Macul","Maipú","Pudahuel","Estación Central","Cerrillos","Lo Espejo",
+                "Lo Prado","Recoleta","Independencia","Conchalí","Quilicura","Renca","Huechuraba","Cerro Navia","Quinta Normal"]
     },
     {
         id: "reg_biobio",

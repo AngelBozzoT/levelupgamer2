@@ -1,4 +1,4 @@
-/* Estructura de la Barra de Navegación (Navbar) */
+/* Barra de Navegación Superior (Navbar) */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -11,24 +11,31 @@
     z-index: 1000;
 }
 
+/* Contenedor del Logo (Protege el espacio del logo y su título contiguo) */
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
+    flex-shrink: 0; /* Impide que el contenedor se achique si crece el menú */
 }
 
+/* Control estricto y escalable del Logotipo */
 .logo-img {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
+    width: 80px;         /* Tamaño del logo visible y balanceado */
+    height: 80px;        /* Proporción idéntica para evitar deformación */
+    object-fit: contain; /* Ajusta la imagen sin estirarla */
+    flex-shrink: 0;      /* Garantiza que mantenga sus dimensiones exactas */
 }
 
+/* Título de la tienda al costado del Logo */
 .navbar h1 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: var(--texto-blanco);
     text-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+    white-space: nowrap; /* Evita saltos de línea que desalineen la barra */
 }
 
+/* Menú de Enlaces de Navegación */
 .nav-links {
     display: flex;
     list-style: none;
@@ -50,10 +57,12 @@
     text-shadow: 0 0 8px var(--verde-neon);
 }
 
+/* Acciones del Encabezado (Botón de registro y Carrito) */
 .header-actions {
     display: flex;
     align-items: center;
     gap: 20px;
+    flex-shrink: 0; /* Impide que colapsen en pantallas reducidas */
 }
 
 .cart-widget {
@@ -66,7 +75,11 @@
     font-size: 0.9rem;
 }
 
-/* Área de Contenido Principal */
+/* ==========================================================================
+   ÁREAS DE CONTENIDO PRINCIPAL
+   ========================================================================== */
+
+/* Contenedor Base de las Páginas */
 .main-content {
     flex: 1;
     padding: 40px 20px;
@@ -75,15 +88,34 @@
     margin: 0 auto;
 }
 
-/* Centrado Absoluto para Vistas de Formularios (Registro/Contacto) */
+/* Alineación Central Especial para los Formularios (Registro y Contacto) */
 .flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 180px); /* Resta dinámicamente la altura del Navbar y Footer */
 }
 
-/* Pie de Página Global */
+/* Sección de Encabezado de Vistas Secundarias */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h2 {
+    color: var(--azul-electrico);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: var(--texto-mutado);
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   PIE DE PÁGINA GLOBAL (FOOTER)
+   ========================================================================== */
 .main-footer {
     background-color: #030307;
     padding: 20px;
@@ -91,5 +123,5 @@
     font-size: 0.8rem;
     color: var(--texto-mutado);
     border-top: 1px solid #151530;
-    margin-top: auto;
+    margin-top: auto; /* Empuja el footer siempre hacia abajo en páginas cortas */
 }
