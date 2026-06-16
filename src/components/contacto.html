@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Level-Up Gamer</title>
+    <!-- Ruta relativa de dos niveles hacia atrás para heredar el CSS modular -->
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+    <!-- Menú de Navegación Global (Mantiene consistencia de rutas) -->
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="../assets/logo.png" alt="Level-Up Gamer Logo" class="logo-img">
+            <h1>LEVEL-UP GAMER</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li><a href="contacto.html" class="active">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="registro.html" class="btn-nav">Registrarse</a>
+            <a href="#" class="cart-widget">
+                <span>🛒</span>
+                <span>0</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Contenido Principal: Formulario de Contacto -->
+    <main class="main-content flex-center">
+        <section class="form-container">
+            <h2>FORMULARIO DE CONTACTOS</h2>
+            <p class="form-subtitle">¿Tienes dudas o necesitas soporte técnico? Escríbenos directamente.</p>
+
+            <form id="form-contacto" novalidate>
+                
+                <!-- Campo Nombre Completo -->
+                <div class="form-group">
+                    <label for="contacto-nombre">Nombre Completo *</label>
+                    <input 
+                        type="text" 
+                        id="contacto-nombre" 
+                        name="nombre" 
+                        placeholder="Ej: Juan Pérez"
+                        maxlength="100"
+                    >
+                    <small class="error-message" id="error-contacto-nombre"></small>
+                </div>
+
+                <!-- Campo Correo Electrónico -->
+                <div class="form-group">
+                    <label for="contacto-correo">Correo Electrónico *</label>
+                    <input 
+                        type="email" 
+                        id="contacto-correo" 
+                        name="correo" 
+                        placeholder="Ej: nombre@inacap.cl, @profesor.inacap.cl o @gmail.com"
+                        maxlength="100"
+                    >
+                    <small class="error-message" id="error-contacto-correo"></small>
+                </div>
+
+                <!-- Campo Comentario / Contenido -->
+                <div class="form-group">
+                    <label for="contacto-comentario">Mensaje o Comentario *</label>
+                    <textarea 
+                        id="contacto-comentario" 
+                        name="comentario" 
+                        rows="6" 
+                        placeholder="Escribe tu mensaje aquí..."
+                        maxlength="500"
+                    ></textarea>
+                    <div class="character-counter">
+                        <span id="current-chars">0</span>/500 caracteres
+                    </div>
+                    <small class="error-message" id="error-contacto-comentario"></small>
+                </div>
+
+                <!-- Botón de Envío -->
+                <button type="submit" class="btn-submit">ENVIAR MENSAJE</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Pie de Página Global -->
+    <footer class="main-footer">
+        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Scripts de funcionalidad y validaciones locales -->
+    <script src="../js/validaciones.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

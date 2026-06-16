@@ -1,0 +1,129 @@
+/* Botones Estilo Gamer */
+.btn-nav {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 1px solid var(--azul-electrico);
+    color: var(--texto-blanco);
+    font-family: var(--fuente-titulos);
+    font-size: 0.8rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-nav:hover,
+.btn-nav.active {
+    background-color: var(--azul-electrico);
+    box-shadow: 0 0 12px var(--azul-electrico);
+}
+
+/* Contenedor Base de Formularios (Registro y Contacto) */
+.form-container {
+    background-color: var(--bg-tarjetas);
+    border: 1px solid #1f1f45;
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 550px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.form-container h2 {
+    color: var(--azul-electrico);
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.form-subtitle {
+    color: var(--texto-mutado);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Filas y Elementos del Formulario */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-family: var(--fuente-titulos);
+    font-size: 0.8rem;
+    color: var(--texto-blanco);
+    margin-bottom: 8px;
+}
+
+/* Inputs, Textareas y Selects */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background-color: #0a0a16;
+    border: 1px solid #2a2a5a;
+    color: var(--texto-blanco);
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-family: var(--fuente-cuerpo);
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--azul-electrico);
+    box-shadow: 0 0 8px rgba(30, 144, 255, 0.4);
+}
+
+/* Deshabilitados (como Comuna al inicio) */
+.form-group select:disabled {
+    background-color: #05050a;
+    color: #4a4a70;
+    border-color: #151530;
+    cursor: not-allowed;
+}
+
+/* Mensajes de Validación de Error */
+.error-message {
+    color: var(--rojo-error);
+    font-size: 0.8rem;
+    margin-top: 6px;
+    display: block;
+    min-height: 18px;
+}
+
+/* Contador de caracteres (Formulario de Contacto) */
+.character-counter {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--texto-mutado);
+    margin-top: 4px;
+}
+
+/* Botón Grande de Envío */
+.btn-submit {
+    background-color: transparent;
+    border: 2px solid var(--verde-neon);
+    color: var(--texto-blanco);
+    font-family: var(--fuente-titulos);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 14px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+    background-color: var(--verde-neon);
+    color: #000000;
+    box-shadow: 0 0 15px var(--verde-neon);
+}
