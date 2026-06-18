@@ -127,3 +127,92 @@
     color: #000000;
     box-shadow: 0 0 15px var(--verde-neon);
 }
+/* 1. Contenedor de la Grilla: Distribución Uniforme y Responsiva */
+.products-grid {
+    display: grid;
+    /* Ajusta automáticamente el número de columnas según el espacio disponible */
+    /* Cada columna tendrá un mínimo de 250px y un máximo de 1 fracción del espacio total */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px; /* Espaciado uniforme entre tarjetas */
+    padding: 20px;
+}
+
+/* 2. Tarjeta del Producto: Estructura base */
+.product-card {
+    background-color: #101026; /* Fondo oscuro futurista */
+    border: 1px solid #3d1466; /* Bordes violetas discretos */
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Alinea los elementos verticalmente */
+    justify-content: space-between; /* Empuja el botón y precio siempre al fondo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(147, 51, 234, 0.3); /* Resplandor neón violeta al pasar el mouse */
+}
+
+/* 3. Contenedor de la Imagen: Fuerza un tamaño estricto e igualitario */
+/* 1. El contenedor mantiene el tamaño fijo obligatorio */
+.product-img-container {
+    width: 100%;
+    height: 220px !important; 
+    background-color: #ffffff; /* CAMBIO: Fondo blanco para que los productos de internet se fusionen perfectamente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 15px; /* Margen interno para que el producto no toque los bordes */
+    border-bottom: 1px solid #151535;
+}
+
+/* 2. La imagen se adapta por completo sin perder calidad */
+.product-img-container img {
+    width: 100% !important;
+    height: 100% !important;
+    /* EL TRUCO: Muestra la imagen COMPLETA dentro del espacio, sin importar si es alta o ancha */
+    object-fit: contain !important; 
+    object-position: center !important;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto visual sutil al pasar el mouse */
+.product-card:hover .product-img-container img {
+    transform: scale(1.08);
+
+/* 5. Contenido de Información de la Tarjeta */
+.product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Hace que el bloque de texto ocupe el espacio restante de forma equitativa */
+}
+
+.product-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #b3b3cc;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    /* Limita las descripciones a un máximo de 3 líneas para que las tarjetas midan lo mismo */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 6. Fila de Precio y Botón al fondo */
+.product-price-row {
+    margin-top: auto; /* Empuja esta fila al fondo exacto de la tarjeta de forma simétrica */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
