@@ -3,7 +3,7 @@
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // --- 1. Inicialización de Ubicaciones Dinámicas (Paso Anterior) ---
+    // --- 1. Inicialización de Ubicaciones Dinámicas ---
     const selectRegion = document.getElementById("region");
     const selectComuna = document.getElementById("comuna");
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ==========================================================================
-   SECCIÓN A: Lógica de Ubicaciones (Local)
+   SECCIÓN A: Lógica de Ubicaciones (Carga dinámica de Chile)
    ========================================================================== */
 function inicializarUbicaciones(selectRegion, selectComuna) {
     const datosRegiones = window.regionesData;
@@ -70,87 +70,110 @@ function inicializarUbicaciones(selectRegion, selectComuna) {
 function validarFormularioRegistro(e) {
     e.preventDefault(); // Detener el envío por defecto
 
-    // Limpiar todos los errores previos
+    // Limpiar todos los errores previos usando los ID de error exactos
     limpiarErrores(["username", "email", "password", "fecha", "region", "comuna", "direccion"]);
 
     let esValido = true;
 
     // 1. Validar Nombre de Usuario
-    const username = document.getElementById("username").value.trim();
-    if (username === "") {
-        mostrarError("username", "El nombre de usuario es obligatorio.");
-        esValido = false;
-    }
-
-    // 2. Validar Correo Electrónico General
-    const email = document.getElementById("email").value.trim();
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === "") {
-        mostrarError("email", "El correo electrónico es obligatorio.");
-        esValido = false;
-    } else if (!regexEmail.test(email)) {
-        mostrarError("email", "Por favor, introduce un formato de correo válido.");
-        esValido = false;
-    }
-
-    // 3. Validar Contraseña
-    const password = document.getElementById("password").value;
-    if (password === "") {
-        mostrarError("password", "La contraseña es obligatoria.");
-        esValido = false;
-    } else if (password.length < 6) {
-        mostrarError("password", "La contraseña debe tener al menos 6 caracteres.");
-        esValido = false;
-    }
-
-    // 4. Validar Fecha de Nacimiento (Mayoría de edad: Estricto +18 años)
-    const fechaNacimientoInput = document.getElementById("fecha-nacimiento").value;
-    if (fechaNacimientoInput === "") {
-        mostrarError("fecha", "La fecha de nacimiento es obligatoria.");
-        esValido = false;
-    } else {
-        const fechaNacimiento = new Date(fechaNacimientoInput);
-        const hoy = new Date();
-        
-        let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-        const mes = hoy.getMonth() - fechaNacimiento.getMonth();
-        
-        // Ajustar si el cumpleaños no ha pasado este año todavía
-        if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-            edad--;
-        }
-
-        if (edad < 18) {
-            mostrarError("fecha", `Debes ser mayor de 18 años para registrarte. Tu edad actual calculada es ${edad} años.`);
+    const usernameElement = document.getElementById("username");
+    if (usernameElement) {
+        const username = usernameElement.value.trim();
+        if (username === "") {
+            mostrarError("username", "El nombre de usuario es obligatorio.");
             esValido = false;
         }
     }
 
-    // 5. Validar Región y Comuna
-    const region = document.getElementById("region").value;
-    const comuna = document.getElementById("comuna").value;
-
-    if (region === "") {
-        mostrarError("region", "Debes seleccionar una región.");
-        esValido = false;
+    // 2. Validar Correo Electrónico General
+    const emailElement = document.getElementById("email");
+    if (emailElement) {
+        const email = emailElement.value.trim();
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email === "") {
+            mostrarError("email", "El correo electrónico es obligatorio.");
+            esValido = false;
+        } else if (!regexEmail.test(email)) {
+            mostrarError("email", "Por favor, introduce un formato de correo válido.");
+            esValido = false;
+        }
     }
-    if (comuna === "" && region !== "") {
-        mostrarError("comuna", "Debes seleccionar una comuna.");
-        esValido = false;
+
+    // 3. Validar Contraseña
+    const passwordElement = document.getElementById("password");
+    if (passwordElement) {
+        const password = passwordElement.value;
+        if (password === "") {
+            mostrarError("password", "La contraseña es obligatoria.");
+            esValido = false;
+        } else if (password.length < 6) {
+            mostrarError("password", "La contraseña debe tener al menos 6 caracteres.");
+            esValido = false;
+        }
+    }
+
+    // 4. Validar Fecha de Nacimiento (Control estricto de zona horaria local +18)
+    const fechaInput = document.getElementById("fecha-nacimiento");
+    if (fechaInput) {
+        const fechaNacimientoInput = fechaInput.value;
+        if (fechaNacimientoInput === "") {
+            mostrarError("fecha", "La fecha de nacimiento es obligatoria.");
+            esValido = false;
+        } else {
+            // CORREGIDO: Parsear la fecha manualmente para evitar desvíos horarias UTC
+            const partes = fechaNacimientoInput.split('-');
+            const anioNac = parseInt(partes[0], 10);
+            const mesNac = parseInt(partes[1], 10) - 1; 
+            const diaNac = parseInt(partes[2], 10);
+
+            const hoy = new Date();
+            let edad = hoy.getFullYear() - anioNac;
+            const mesDiferencia = hoy.getMonth() - mesNac;
+
+            if (mesDiferencia < 0 || (mesDiferencia === 0 && hoy.getDate() < diaNac)) {
+                edad--;
+            }
+
+            if (edad < 18) {
+                mostrarError("fecha", `Debes ser mayor de 18 años para registrarte. Tu edad actual es ${edad} años.`);
+                esValido = false;
+            }
+        }
+    }
+
+    // 5. Validar Región y Comuna
+    const regionElement = document.getElementById("region");
+    const comunaElement = document.getElementById("comuna");
+    
+    if (regionElement && comunaElement) {
+        const region = regionElement.value;
+        const comuna = comunaElement.value;
+
+        if (region === "") {
+            mostrarError("region", "Debes seleccionar una región.");
+            esValido = false;
+        }
+        if (comuna === "" && region !== "") {
+            mostrarError("comuna", "Debes seleccionar una comuna.");
+            esValido = false;
+        }
     }
 
     // 6. Validar Dirección
-    const direccion = document.getElementById("direccion").value.trim();
-    if (direccion === "") {
-        mostrarError("direccion", "La dirección de despacho es obligatoria.");
-        esValido = false;
+    const direccionElement = document.getElementById("direccion");
+    if (direccionElement) {
+        const direccion = direccionElement.value.trim();
+        if (direccion === "") {
+            mostrarError("direccion", "La dirección de despacho es obligatoria.");
+            esValido = false;
+        }
     }
 
     // Si todo pasa con éxito
     if (esValido) {
         alert("¡Registro exitoso localmente! Bienvenido a Level-Up Gamer.");
         document.getElementById("form-registro").reset();
-        document.getElementById("comuna").disabled = true;
+        if (comunaElement) comunaElement.disabled = true;
     }
 }
 
@@ -159,7 +182,10 @@ function validarFormularioRegistro(e) {
    ========================================================================== */
 function actualizarContadorCaracteres(e) {
     const longitud = e.target.value.length;
-    document.getElementById("current-chars").textContent = longitud;
+    const currentCharsElement = document.getElementById("current-chars");
+    if (currentCharsElement) {
+        currentCharsElement.textContent = longitud;
+    }
 }
 
 function validarFormularioContacto(e) {
@@ -170,53 +196,61 @@ function validarFormularioContacto(e) {
     let esValido = true;
 
     // 1. Validar Nombre Completo (Max 100 caracteres)
-    const nombre = document.getElementById("contacto-nombre").value.trim();
-    if (nombre === "") {
-        mostrarError("contacto-nombre", "El nombre completo es requerido.");
-        esValido = false;
-    } else if (nombre.length > 100) {
-        mostrarError("contacto-nombre", "El nombre no puede superar los 100 caracteres.");
-        esValido = false;
-    }
-
-    // 2. Validar Correo Institucional / Gmail con dominios específicos (Max 100)
-    const correo = document.getElementById("contacto-correo").value.trim();
-    if (correo === "") {
-        mostrarError("contacto-correo", "El correo electrónico es requerido.");
-        esValido = false;
-    } else if (correo.length > 100) {
-        mostrarError("contacto-correo", "El correo no puede superar los 100 caracteres.");
-        esValido = false;
-   } else {
-        // Expresión regular estándar y genérica para validar el formato de un correo electrónico
-        const regexCorreoGenerico = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!regexCorreoGenerico.test(correo)) {
-            mostrarError("contacto-correo", "Por favor, introduce una dirección de correo electrónico válida (Ej: usuario@dominio.com).");
+    const nombreElement = document.getElementById("contacto-nombre");
+    if (nombreElement) {
+        const nombre = nombreElement.value.trim();
+        if (nombre === "") {
+            mostrarError("contacto-nombre", "El nombre completo es requerido.");
+            esValido = false;
+        } else if (nombre.length > 100) {
+            mostrarError("contacto-nombre", "El nombre no puede superar los 100 caracteres.");
             esValido = false;
         }
     }
 
+    // 2. Validar Correo Electrónico (Max 100)
+    const correoElement = document.getElementById("contacto-correo");
+    if (correoElement) {
+        const correo = correoElement.value.trim();
+        if (correo === "") {
+            mostrarError("contacto-correo", "El correo electrónico es requerido.");
+            esValido = false;
+        } else if (correo.length > 100) {
+            mostrarError("contacto-correo", "El correo no puede superar los 100 caracteres.");
+            esValido = false;
+        } else {
+            const regexCorreoGenerico = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regexCorreoGenerico.test(correo)) {
+                mostrarError("contacto-correo", "Por favor, introduce una dirección de correo válida (Ej: usuario@dominio.com).");
+                esValido = false;
+            }
+        }
+    }
+
     // 3. Validar Comentario o Mensaje (Max 500 caracteres)
-    const comentario = document.getElementById("contacto-comentario").value.trim();
-    if (comentario === "") {
-        mostrarError("contacto-comentario", "El comentario o mensaje es requerido.");
-        esValido = false;
-    } else if (comentario.length > 500) {
-        mostrarError("contacto-comentario", "El mensaje no puede exceder los 500 caracteres.");
-        esValido = false;
+    const comentarioElement = document.getElementById("contacto-comentario");
+    if (comentarioElement) {
+        const comentario = comentarioElement.value.trim();
+        if (comentario === "") {
+            mostrarError("contacto-comentario", "El comentario o mensaje es requerido.");
+            esValido = false;
+        } else if (comentario.length > 500) {
+            mostrarError("contacto-comentario", "El mensaje no puede exceder los 500 caracteres.");
+            esValido = false;
+        }
     }
 
     // Si todo es correcto
     if (esValido) {
         alert("¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.");
         document.getElementById("form-contacto").reset();
-        document.getElementById("current-chars").textContent = "0";
+        const currentCharsElement = document.getElementById("current-chars");
+        if (currentCharsElement) currentCharsElement.textContent = "0";
     }
 }
 
 /* ==========================================================================
-   SECCIÓN D: Funciones Auxiliares de Interfaz
+   SECCIÓN D: Funciones Auxiliares de Interfaz (Renderizado Seguro)
    ========================================================================== */
 function mostrarError(idPrefijo, mensaje) {
     const contenedorError = document.getElementById(`error-${idPrefijo}`);

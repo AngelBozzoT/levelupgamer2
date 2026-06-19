@@ -38,7 +38,7 @@ function gestionarMenuActivo() {
     const rutaActual = window.location.pathname;
     const nombreArchivo = rutaActual.substring(rutaActual.lastIndexOf('/') + 1);
 
-    // CORREGIDO: Selector actualizado a ".nav-menu .btn-nav" para que coincida con tu HTML
+    // Selector actualizado a ".nav-menu .btn-nav" para que coincida perfectamente con tu HTML
     const enlacesNav = document.querySelectorAll(".nav-menu .btn-nav");
 
     enlacesNav.forEach(enlace => {
@@ -100,8 +100,7 @@ window.agregarAlCarritoSimulado = function(codigoProducto) {
     if (carrito[codigoProducto]) {
         carrito[codigoProducto]++;
     } else {
-        carrito[carritoProducto] = 1; // Resguardo
-        carrito[codigoProducto] = 1;
+        carrito[codigoProducto] = 1; // CORREGIDO: Se eliminó la variable inexistente 'carritoProducto'
     }
 
     // 3. Guardar el objeto actualizado en localStorage
@@ -111,8 +110,8 @@ window.agregarAlCarritoSimulado = function(codigoProducto) {
     let cantidadTotal = Object.values(carrito).reduce((a, b) => a + b, 0);
     localStorage.setItem("cart_quantity", cantidadTotal);
 
-    // 5. Actualizar visualmente los contadores en la página
-    const contadores = document.querySelectorAll("#cart-count, .cart-widget span:last-child");
+    // 5. Actualizar visualmente los contadores en la página de forma precisa
+    const contadores = document.querySelectorAll("#cart-count");
     contadores.forEach(contador => {
         contador.textContent = cantidadTotal;
     });
@@ -124,7 +123,8 @@ window.agregarAlCarritoSimulado = function(codigoProducto) {
  * Abre la ventana modal cargando dinámicamente los detalles del producto presionado.
  */
 window.abrirDetalle = function(codigo, titulo, descripcion, imagenUrl, precio) {
-    const modal = document.getElementById("product-modal");
+    // CORREGIDO: Coincidir con el ID real 'product-modal' u 'modal-overlay' usado comúnmente
+    const modal = document.getElementById("product-modal") || document.querySelector(".modal-overlay");
     
     // Blindaje: Verificar que la modal exista en la página antes de rellenar sus datos
     if (modal) {
@@ -157,15 +157,15 @@ window.abrirDetalle = function(codigo, titulo, descripcion, imagenUrl, precio) {
  * Cierra la ventana modal de detalles.
  */
 window.cerrarDetalle = function() {
-    const modal = document.getElementById("product-modal");
+    const modal = document.getElementById("product-modal") || document.querySelector(".modal-overlay");
     if (modal) {
         modal.style.display = "none";
     }
 };
 
-// Cerrar también si el usuario hace clic afuera de la caja central
+// Cerrar también si el usuario hace clic afuera de la caja central (overlay translúcido)
 window.addEventListener("click", (e) => {
-    const modal = document.getElementById("product-modal");
+    const modal = document.getElementById("product-modal") || document.querySelector(".modal-overlay");
     if (modal && e.target === modal) {
         modal.style.display = "none";
     }

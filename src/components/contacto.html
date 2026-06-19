@@ -4,36 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto | Level-Up Gamer</title>
-    <!-- Ruta relativa de dos niveles hacia atrás para heredar el CSS modular -->
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
 
-    <!-- Menú de Navegación Global (Mantiene consistencia de rutas) -->
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="../assets/logo.png" alt="Level-Up Gamer Logo" class="logo-img">
-            <h1>LEVEL-UP GAMER</h1>
-        </div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="../../index.html">Home</a></li>
-                <li><a href="productos.html">Productos</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="contacto.html" class="active">Contacto</a></li>
-            </ul>
-        </nav>
-        <div class="header-actions">
-            <a href="registro.html" class="btn-nav">Registrarse</a>
-            <a href="#" class="cart-widget">
-                <span>🛒</span>
-                <span>0</span>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo-container">
+                <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
+                <span class="logo-text">LEVEL-UP GAMER</span>
             </a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="nav-menu">
+                <a href="../../index.html" class="btn-nav">Home</a>
+                <a href="productos.html" class="btn-nav">Productos</a>
+                <a href="nosotros.html" class="btn-nav">Nosotros</a>
+                <a href="blogs.html" class="btn-nav">Blogs</a>
+                <a href="contacto.html" class="btn-nav active">Contacto</a>
+                <a href="registro.html" class="btn-nav signup">Registrarse</a>
+                <a href="#" class="btn-nav cart-widget" style="border: none; background: transparent; box-shadow: none;">
+                    🛒 Carrito (<span id="cart-count">0</span>)
+                </a>
+            </nav>
         </div>
     </header>
 
-    <!-- Contenido Principal: Formulario de Contacto -->
     <main class="main-content flex-center">
         <section class="form-container">
             <h2>FORMULARIO DE CONTACTOS</h2>
@@ -41,7 +42,6 @@
 
             <form id="form-contacto" novalidate>
                 
-                <!-- Campo Nombre Completo -->
                 <div class="form-group">
                     <label for="contacto-nombre">Nombre Completo *</label>
                     <input 
@@ -54,7 +54,6 @@
                     <small class="error-message" id="error-contacto-nombre"></small>
                 </div>
 
-                <!-- Campo Correo Electrónico -->
                 <div class="form-group">
                     <label for="contacto-correo">Correo Electrónico *</label>
                     <input 
@@ -67,7 +66,6 @@
                     <small class="error-message" id="error-contacto-correo"></small>
                 </div>
 
-                <!-- Campo Comentario / Contenido -->
                 <div class="form-group">
                     <label for="contacto-comentario">Mensaje o Comentario *</label>
                     <textarea 
@@ -83,18 +81,15 @@
                     <small class="error-message" id="error-contacto-comentario"></small>
                 </div>
 
-                <!-- Botón de Envío -->
                 <button type="submit" class="btn-submit">ENVIAR MENSAJE</button>
             </form>
         </section>
     </main>
 
-    <!-- Pie de Página Global -->
     <footer class="main-footer">
-        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
     </footer>
 
-    <!-- Scripts de funcionalidad y validaciones locales -->
     <script src="../js/validaciones.js"></script>
     <script src="../js/main.js"></script>
 </body>

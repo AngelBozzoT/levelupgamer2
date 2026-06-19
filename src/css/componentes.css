@@ -1,4 +1,6 @@
-/* Botones Estilo Gamer */
+/* ==========================================================================
+   BOTONES ESTILO GAMER & NAVEGACIÓN
+   ========================================================================== */
 .btn-nav {
     display: inline-block;
     padding: 8px 16px;
@@ -9,16 +11,32 @@
     font-size: 0.8rem;
     text-decoration: none;
     border-radius: 4px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
 .btn-nav:hover,
 .btn-nav.active {
     background-color: var(--azul-electrico);
+    color: var(--texto-blanco);
     box-shadow: 0 0 12px var(--azul-electrico);
 }
 
-/* Contenedor Base de Formularios (Registro y Contacto) */
+/* Variante especial para botón de Registrarse en menú */
+.btn-nav.signup {
+    border-color: var(--verde-neon);
+    color: var(--verde-neon);
+}
+
+.btn-nav.signup:hover,
+.btn-nav.signup.active {
+    background-color: var(--verde-neon);
+    color: #000000;
+    box-shadow: 0 0 12px var(--verde-neon);
+}
+
+/* ==========================================================================
+   CONTENEDOR BASE DE FORMULARIOS (REGISTRO Y CONTACTO)
+   ========================================================================== */
 .form-container {
     background-color: var(--bg-tarjetas);
     border: 1px solid #1f1f45;
@@ -27,6 +45,7 @@
     width: 100%;
     max-width: 550px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    box-sizing: border-box;
 }
 
 .form-container h2 {
@@ -71,6 +90,7 @@
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group input:focus,
@@ -117,7 +137,7 @@
     width: 100%;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
     margin-top: 10px;
     letter-spacing: 1px;
 }
@@ -127,6 +147,11 @@
     color: #000000;
     box-shadow: 0 0 15px var(--verde-neon);
 }
+
+
+/* ==========================================================================
+   GRILLA DE PRODUCTOS Y TARJETAS
+   ========================================================================== */
 
 /* 1. Contenedor de la Grilla: Distribución Uniforme y Responsiva */
 .products-grid {
@@ -164,6 +189,7 @@
     overflow: hidden;
     padding: 15px;
     border-bottom: 1px solid #151535;
+    box-sizing: border-box;
 }
 
 .product-img-container img {
@@ -177,7 +203,7 @@
 /* Efecto visual sutil al pasar el mouse */
 .product-card:hover .product-img-container img {
     transform: scale(1.08);
-} /* <-- CORREGIDO: Aquí faltaba esta llave de cierre */
+}
 
 /* 5. Contenido de Información de la Tarjeta */
 .product-info {
@@ -198,7 +224,7 @@
 .product-price-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* Alineación perfecta */
     margin-top: auto;
 }
 
@@ -209,9 +235,8 @@
     font-family: var(--fuente-titulos);
 }
 
-/* 6. Botón "Añadir al Carrito" Estilo Cyberpunk (Tamaño Uniforme Simétrico) */
+/* 6. Botón "Añadir al Carrito" Estilo Cyberpunk */
 .product-card .btn-add-cart {
-    /* Forzamos a que todos midan exactamente lo mismo sin importar el texto */
     width: 115px; 
     height: 38px;
     
@@ -224,7 +249,6 @@
     color: var(--verde-neon);
     border: 1px solid var(--verde-neon);
     
-    /* Usamos un padding interno pequeño y fijo */
     padding: 0 8px; 
     
     font-size: 0.85rem;
@@ -236,9 +260,9 @@
     transition: all 0.3s ease;
     box-shadow: 0 0 8px rgba(57, 255, 20, 0.2);
     
-    /* Evita que paddings o bordes alteren el tamaño asignado */
     box-sizing: border-box; 
 }
+
 .product-card .btn-add-cart:hover {
     background-color: var(--verde-neon);
     color: #05050f;
@@ -250,8 +274,9 @@
     transform: translateY(0);
 }
 
+
 /* ==========================================================================
-    VENTANA MODAL DE DETALLES (POP-UP)
+   VENTANA MODAL DE DETALLES (POP-UP)
    ========================================================================== */
 
 /* Fondo oscurecido translúcido */
@@ -277,6 +302,8 @@
     border-radius: 12px;
     width: 90%;
     max-width: 700px;
+    max-height: 90vh; /* Optimización contra desbordamiento */
+    overflow-y: auto;  /* Permite scroll interno si el texto es muy largo */
     padding: 30px;
     position: relative;
     animation: fadeInModal 0.3s ease;
@@ -396,8 +423,9 @@
     transform: translateY(0);
 }
 
+
 /* ==========================================================================
-    RESPONSIVE: MENÚ HAMBURGUESA Y MODAL (Pantallas < 768px)
+   RESPONSIVE: MENÚ HAMBURGUESA Y MODAL (PANTALLAS < 768px)
    ========================================================================== */
 
 /* Botón Hamburguesa oculto por defecto en escritorio */
