@@ -3,201 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Productos | Level-Up Gamer</title>
+    <title>Level-Up Gamer - Catálogo de Productos</title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
 
-    <header class="navbar">
+    <nav class="navbar">
         <div class="logo-container">
-            <img src="../assets/logo.png" alt="Level-Up Gamer Logo" class="logo-img">
+            <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
             <h1>LEVEL-UP GAMER</h1>
         </div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="../../index.html">Home</a></li>
-                <li><a href="productos.html" class="active">Productos</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
+        <ul class="nav-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="productos.html" class="active">Productos</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
         <div class="header-actions">
-            <a href="registro.html" class="btn-nav">Registrarse</a>
+            <a href="registro.html" class="btn-add-cart" style="border-color: var(--verde-neon); color: var(--verde-neon);">Registrarse</a>
             <a href="#" class="cart-widget">
-                <span>🛒</span>
-                <span>0</span>
+                🛒 Carrito (<span id="cart-count">0</span>)
             </a>
         </div>
-    </header>
+    </nav>
 
-    <!-- Contenido Principal: Catálogo Oficial con Imágenes Web y Locales -->
     <main class="main-content">
         <section class="page-header">
             <h2>CATÁLOGO DE PRODUCTOS</h2>
-            <p>Equipamiento premium seleccionado para el máximo rendimiento.</p>
+            <p>Haz clic en cualquier producto para ver su detalle técnico y descripción completa.</p>
         </section>
 
-        <!-- Grilla de Productos de la Tienda -->
         <section class="products-grid">
             
-            <!-- Producto 1: Catan (Juegos de Mesa) -->
             <div class="product-card">
                 <div class="product-badge">Juegos de Mesa</div>
-                <div class="product-img-container">
-                    <img src="https://i5.walmartimages.com/asr/a1863816-7553-441d-ad37-734a716ed55a.00a63b9153c188bd583dbfd05b191f90.jpeg" alt="Catan" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=Catan'">
+                <div class="product-img-container" onclick="abrirDetalle('JM001', 'Catan', 'El célebre juego de estrategia, negociación y colonización. Reúne materias primas, construye pueblos y expande tus dominios para convertirte en el soberano de la isla.', 'https://i5.walmartimages.com/asr/a1863816-7553-441d-ad37-734a716ed55a.00a63b9153c188bd583dbfd05b191f90.jpeg', '$29.990')">
+                    <img src="https://i5.walmartimages.com/asr/a1863816-7553-441d-ad37-734a716ed55a.00a63b9153c188bd583dbfd05b191f90.jpeg" alt="Catan">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Catan</h3>
-                    <p class="product-description">El célebre juego de estrategia, negociación y colonización. Reúne materias primas, construye pueblos y expande tus dominios para convertirte en el soberano de la isla.</p>
+                    <h3 class="product-title" onclick="abrirDetalle('JM001', 'Catan', 'El célebre juego de estrategia, negociación y colonización. Reúne materias primas, construye pueblos y expande tus dominios para convertirte en el soberano de la isla.', 'https://i5.walmartimages.com/asr/a1863816-7553-441d-ad37-734a716ed55a.00a63b9153c188bd583dbfd05b191f90.jpeg', '$29.990')" style="cursor: pointer;">Catan</h3>
                     <div class="product-price-row">
                         <span class="product-price">$29.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
+                        
                     </div>
                 </div>
             </div>
 
-            <!-- Producto 2: Carcassonne (Juegos de Mesa) -->
             <div class="product-card">
                 <div class="product-badge">Juegos de Mesa</div>
-                <div class="product-img-container">
-                    <img src="https://i5.walmartimages.cl/asr/5e0f858c-e687-4f05-8726-ac9a2d46296c.7c1b8264366f4112b169ce70a23e8531.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" alt="Carcassonne" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=Carcassonne'">
+                <div class="product-img-container" onclick="abrirDetalle('JM002', 'Carcassonne', 'Un juego clásico de tablero moderno. Crea tu propio mapa medieval loseta a loseta, desplegando a tus seguidores como caballeros, bandidos, monjes o campesinos para sumar puntos de victoria.', 'https://i5.walmartimages.cl/asr/5e0f858c-e687-4f05-8726-ac9a2d46296c.7c1b8264366f4112b169ce70a23e8531.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF', '$24.990')">
+                    <img src="https://i5.walmartimages.cl/asr/5e0f858c-e687-4f05-8726-ac9a2d46296c.7c1b8264366f4112b169ce70a23e8531.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" alt="Carcassonne">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Carcassonne</h3>
-                    <p class="product-description">Un juego clásico de tablero moderno. Crea tu propio mapa medieval loseta a loseta, desplegando a tus seguidores como caballeros, bandidos, monjes o campesinos para sumar puntos.</p>
+                    <h3 class="product-title" onclick="abrirDetalle('JM002', 'Carcassonne', 'Un juego clásico de tablero moderno. Crea tu propio mapa medieval loseta a loseta, desplegando a tus seguidores como caballeros, bandidos, monjes o campesinos para sumar puntos de victoria.', 'https://i5.walmartimages.cl/asr/5e0f858c-e687-4f05-8726-ac9a2d46296c.7c1b8264366f4112b169ce70a23e8531.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF', '$24.990')" style="cursor: pointer;">Carcassonne</h3>
                     <div class="product-price-row">
                         <span class="product-price">$24.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
+                        
                     </div>
                 </div>
             </div>
 
-            <!-- Producto 3: Control Inalámbrico Xbox Series X/S -->
             <div class="product-card">
                 <div class="product-badge">Accesorios</div>
-                <div class="product-img-container">
-                    <img src="https://i5.walmartimages.cl/asr/e53427b4-1133-4a53-93c8-9774f0385073.ad9f942fce2f82f3b36e538ba0c8dd5b.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" alt="Control Inalámbrico Xbox Series X" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=Control+Xbox'">
+                <div class="product-img-container" onclick="abrirDetalle('AC001', 'Controlador Inalámbrico Xbox Series X', 'Experimenta el diseño modernizado del mando inalámbrico de Xbox, con superficies esculpidas y geometría refinada para una mayor comodidad. Totalmente compatible con consolas Xbox, PC y dispositivos móviles.', 'https://i5.walmartimages.cl/asr/e53427b4-1133-4a53-93c8-9774f0385073.ad9f942fce2f82f3b36e538ba0c8dd5b.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF', '$59.990')">
+                    <img src="https://i5.walmartimages.cl/asr/e53427b4-1133-4a53-93c8-9774f0385073.ad9f942fce2f82f3b36e538ba0c8dd5b.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" alt="Control Xbox">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Control Inalámbrico Xbox Series X</h3>
-                    <p class="product-description">Experimenta el diseño modernizado del mando inalámbrico de Xbox, con superficies esculpidas y geometría refinada para una mayor comodidad. Compatible con consolas Xbox y PC.</p>
+                    <h3 class="product-title" onclick="abrirDetalle('AC001', 'Controlador Inalámbrico Xbox Series X', 'Experimenta el diseño modernizado del mando inalámbrico de Xbox, con superficies esculpidas y geometría refinada para una mayor comodidad. Totalmente compatible con consolas Xbox, PC y dispositivos móviles.', 'https://i5.walmartimages.cl/asr/e53427b4-1133-4a53-93c8-9774f0385073.ad9f942fce2f82f3b36e538ba0c8dd5b.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF', '$59.990')" style="cursor: pointer;">Control Xbox Series X</h3>
                     <div class="product-price-row">
                         <span class="product-price">$59.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
+                        
                     </div>
                 </div>
             </div>
 
-            <!-- Producto 4: Audífonos Gamer HyperX Cloud II -->
             <div class="product-card">
                 <div class="product-badge">Accesorios</div>
-                <div class="product-img-container">
-                    <img src="https://http2.mlstatic.com/D_NQ_NP_953165-CBT112200835901_052026-O.webp" alt="Auriculares Gamer HyperX Cloud II" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=HyperX+Cloud+II'">
+                <div class="product-img-container" onclick="abrirDetalle('AC002', 'Auriculares Gamer HyperX Cloud II', 'Proporcionan un sonido envolvente de alta fidelidad virtual 7.1 con un micrófono desmontable con cancelación de ruido y almohadillas de espuma viscoelástica para una comodidad insuperable.', 'https://http2.mlstatic.com/D_NQ_NP_953165-CBT112200835901_052026-O.webp', '$79.990')">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_953165-CBT112200835901_052026-O.webp" alt="HyperX Cloud II">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Auriculares Gamer HyperX Cloud II</h3>
-                    <p class="product-description">Proporcionan un sonido envolvente de calidad con un micrófono desmontable y almohadillas de espuma viscoelástica para mayor comodidad durante largas sesiones de juego.</p>
+                    <h3 class="product-title" onclick="abrirDetalle('AC002', 'Auriculares Gamer HyperX Cloud II', 'Proporcionan un sonido envolvente de alta fidelidad virtual 7.1 con un micrófono desmontable con cancelación de ruido y almohadillas de espuma viscoelástica para una comodidad insuperable.', 'https://http2.mlstatic.com/D_NQ_NP_953165-CBT112200835901_052026-O.webp', '$79.990')" style="cursor: pointer;">HyperX Cloud II</h3>
                     <div class="product-price-row">
                         <span class="product-price">$79.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
+                       
                     </div>
                 </div>
             </div>
 
-            <!-- Producto 5: PlayStation 5 -->
             <div class="product-card">
                 <div class="product-badge">Consolas</div>
-                <div class="product-img-container">
-                    <img src="https://media.solotodo.com/media/products/1979309_picture_1731571228.jpg" alt="PlayStation 5" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=PlayStation+5'">
+                <div class="product-img-container" onclick="abrirDetalle('CO001', 'PlayStation 5', 'La potente consola de última generación de Sony, que ofrece trazado de rayos para gráficos fotorrealistas, SSD de velocidad ultra alta para tiempos de carga mínimos y audio 3D inmersivo.', 'https://media.solotodo.com/media/products/1979309_picture_1731571228.jpg', '$549.990')">
+                    <img src="https://media.solotodo.com/media/products/1979309_picture_1731571228.jpg" alt="PlayStation 5">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">PlayStation 5</h3>
-                    <p class="product-description">La consola de última generación de Sony, que ofrece gráficos impresionantes y tiempos de carga ultrarrápidos para una experiencia de juego inmersiva.</p>
+                    <h3 class="product-title" onclick="abrirDetalle('CO001', 'PlayStation 5', 'La potente consola de última generación de Sony, que ofrece trazado de rayos para gráficos fotorrealistas, SSD de velocidad ultra alta para tiempos de carga mínimos y audio 3D inmersivo.', 'https://media.solotodo.com/media/products/1979309_picture_1731571228.jpg', '$549.990')" style="cursor: pointer;">PlayStation 5</h3>
                     <div class="product-price-row">
                         <span class="product-price">$549.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
+                        
                     </div>
                 </div>
             </div>
 
-            <!-- Producto 6: PC Gamer ASUS ROG Strix -->
             <div class="product-card">
                 <div class="product-badge">Computadores Gamers</div>
-                <div class="product-img-container">
-                    <img src="https://media.spdigital.cl/thumbnails/products/ygse9ue7_b405ce7d_thumbnail_512.jpg" alt="PC Gamer ASUS ROG Strix" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=PC+ASUS+ROG'">
+                <div class="product-img-container" onclick="abrirDetalle('CG001', 'PC Gamer ASUS ROG Strix', 'Un potente equipo de escritorio optimizado para esports y streaming, equipado con hardware de vanguardia para asegurar altos FPS estables y refrigeración térmica inteligente de nivel premium.', 'https://media.spdigital.cl/thumbnails/products/ygse9ue7_b405ce7d_thumbnail_512.jpg', '$1.299.990')">
+                    <img src="https://media.spdigital.cl/thumbnails/products/ygse9ue7_b405ce7d_thumbnail_512.jpg" alt="PC ASUS ROG Strix">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">PC Gamer ASUS ROG Strix</h3>
-                    <p class="product-description">Un potente equipo diseñado para los gamers más exigentes, equipado con los últimos componentes para ofrecer un rendimiento excepcional en cualquier juego.</p>
+                    <h3 class="product-title" onclick="abrirDetalle('CG001', 'PC Gamer ASUS ROG Strix', 'Un potente equipo de escritorio optimizado para esports y streaming, equipado con hardware de vanguardia para asegurar altos FPS estables y refrigeración térmica inteligente de nivel premium.', 'https://media.spdigital.cl/thumbnails/products/ygse9ue7_b405ce7d_thumbnail_512.jpg', '$1.299.990')" style="cursor: pointer;">ASUS ROG Strix</h3>
                     <div class="product-price-row">
                         <span class="product-price">$1.299.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
+                        
                     </div>
                 </div>
             </div>
 
-            <!-- Producto 7: Silla Gamer Secretlab Titan -->
             <div class="product-card">
                 <div class="product-badge">Sillas Gamers</div>
-                <div class="product-img-container">
-                    <img src="https://m.media-amazon.com/images/I/410uYasNqFL._AC_UF894,1000_QL80_.jpg" alt="Silla Gamer Secretlab Titan" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=Secretlab+Titan'">
+                <div class="product-img-container" onclick="abrirDetalle('SG001', 'Silla Gamer Secretlab Titan', 'Silla ergonómica galardonada mundialmente, construida con materiales de alta calidad que entregan un soporte lumbar ajustable integrado y adaptabilidad absoluta para extensas jornadas.', 'https://m.media-amazon.com/images/I/410uYasNqFL._AC_UF894,1000_QL80_.jpg', '$349.990')">
+                    <img src="https://m.media-amazon.com/images/I/410uYasNqFL._AC_UF894,1000_QL80_.jpg" alt="Secretlab Titan">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Silla Gamer Secretlab Titan</h3>
-                    <p class="product-description">Diseñada para el máximo confort, esta silla ofrece un soporte ergonómico y personalización ajustable para sesiones de juego prolongadas.</p>
+                    <h3 class="product-title" onclick="abrirDetalle('SG001', 'Silla Gamer Secretlab Titan', 'Silla ergonómica galardonada mundialmente, construida con materiales de alta calidad que entregan un soporte lumbar ajustable integrado y adaptabilidad absoluta para extensas jornadas.', 'https://m.media-amazon.com/images/I/410uYasNqFL._AC_UF894,1000_QL80_.jpg', '$349.990')" style="cursor: pointer;">Secretlab Titan</h3>
                     <div class="product-price-row">
                         <span class="product-price">$349.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
+                       
                     </div>
                 </div>
             </div>
 
-            <!-- Producto 8: Mouse Gamer Logitech G502 HERO -->
             <div class="product-card">
                 <div class="product-badge">Mouse</div>
-                <div class="product-img-container">
-                    <img src="https://media.spdigital.cl/thumbnails/products/snbujg5__29f7dd61_thumbnail_4096.jpg" alt="Mouse Gamer Logitech G502 HERO" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=Logitech+G502'">
+                <div class="product-img-container" onclick="abrirDetalle('MS001', 'Mouse Gamer Logitech G502 HERO', 'Equipado con el sensor óptico avanzado HERO 25K, 11 botones completamente programables, pesas ajustables individuales y tecnología de iluminación RGB LIGHTSYNC personalizable.', 'https://media.spdigital.cl/thumbnails/products/snbujg5__29f7dd61_thumbnail_4096.jpg', '$49.990')">
+                    <img src="https://media.spdigital.cl/thumbnails/products/snbujg5__29f7dd61_thumbnail_4096.jpg" alt="Logitech G502">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Mouse Gamer Logitech G502 HERO</h3>
-                    <p class="product-description">Con sensor de alta precisión y botones personalizables, este mouse es ideal para gamers que buscan un control preciso y personalización.</p>
+                    <h3 class="product-title" onclick="abrirDetalle('MS001', 'Mouse Gamer Logitech G502 HERO', 'Equipado con el sensor óptico avanzado HERO 25K, 11 botones completamente programables, pesas ajustables individuales y tecnología de iluminación RGB LIGHTSYNC personalizable.', 'https://media.spdigital.cl/thumbnails/products/snbujg5__29f7dd61_thumbnail_4096.jpg', '$49.990')" style="cursor: pointer;">Logitech G502 HERO</h3>
                     <div class="product-price-row">
                         <span class="product-price">$49.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Producto 9: Mousepad Razer Goliathus Extended Chroma -->
             <div class="product-card">
-                <div class="product-badge">Mousepad</div>
-                <div class="product-img-container">
-                    <img src="https://prophonechile.cl/wp-content/uploads/2023/02/goliathusex.png" alt="Mousepad Razer Goliathus Extended Chroma" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=Razer+Goliathus'">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">Mousepad Razer Goliathus Extended Chroma</h3>
-                    <p class="product-description">Ofrece un área de juego amplia con iluminación RGB personalizable, asegurando una superficie suave y uniforme para el movimiento del mouse.</p>
-                    <div class="product-price-row">
-                        <span class="product-price">$29.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
-                    </div>
-                </div>
-            </div>
+    <div class="product-badge">Mousepad</div>
+    <div class="product-img-container" onclick="abrirDetalle('MP001', 'Mousepad Razer Goliathus Extended Chroma', 'Superficie de tela microtexturizada de tamaño extendido optimizada para todos los sensores de mouse. Ofrece bordes iluminados por ecosistema RGB Razer Chroma con sincronización.', 'https://prophonechile.cl/wp-content/uploads/2023/02/goliathusex.png', '$29.990')">
+        <img src="https://prophonechile.cl/wp-content/uploads/2023/02/goliathusex.png" alt="Razer Goliathus">
+    </div>
+    <div class="product-info">
+        <h3 class="product-title" onclick="abrirDetalle('MP001', 'Mousepad Razer Goliathus Extended Chroma', 'Superficie de tela microtexturizada de tamaño extendido optimizada para todos los sensores de mouse. Ofrece bordes iluminados por ecosistema RGB Razer Chroma con sincronización.', 'https://prophonechile.cl/wp-content/uploads/2023/02/goliathusex.png', '$29.990')" style="cursor: pointer;">Razer Goliathus</h3>
+        <div class="product-price-row">
+            <span class="product-price">$29.990</span>
+        </div>
+    </div>
+</div>
 
-            <!-- Producto 10: Polera Gamer Personalizada 'Level-Up' -->
             <div class="product-card">
                 <div class="product-badge">Poleras Personalizadas</div>
-                <div class="product-img-container">
-                    <!-- Imagen local que agregarás en tu carpeta assets -->
-                    <img src="../assets/polera_levelup.png" alt="Polera Gamer Personalizada Level-Up" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=Polera+Level-Up'">
+                <div class="product-img-container" onclick="abrirDetalle('PP001', 'Polera Gamer Personalizada \'Level-Up\'', 'Camiseta confeccionada en algodón premium transpirable de alta comodidad. Incluye la personalización exclusiva de tu Gamertag o logotipo en alta definición para eventos y streams.', '../assets/polera_levelup.png', '$14.990')">
+                    <img src="../assets/polera_levelup.png" alt="Polera Level-Up" onerror="this.src='https://via.placeholder.com/200x200/101026/ffffff?text=Polera+Level-Up'">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Polera Gamer Personalizada 'Level-Up'</h3>
-                    <p class="product-description">Una camiseta cómoda y estilizada, con la posibilidad de personalizarla con tu gamer tag o diseño favorito para lucir en tus streams o torneos.</p>
+                    <h3 class="product-title" onclick="abrirDetalle('PP001', 'Polera Gamer Personalizada \'Level-Up\'', 'Camiseta confeccionada en algodón premium transpirable de alta comodidad. Incluye la personalización exclusiva de tu Gamertag o logotipo en alta definición para eventos y streams.', '../assets/polera_levelup.png', '$14.990')" style="cursor: pointer;">Polera 'Level-Up'</h3>
                     <div class="product-price-row">
                         <span class="product-price">$14.990</span>
-                        <button class="btn-add-cart" onclick="window.agregarAlCarritoSimulado()">Añadir 🛒</button>
                     </div>
                 </div>
             </div>
@@ -206,8 +177,27 @@
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Level-Up Gamer - Todos los derechos reservados. Evaluación Académica.</p>
     </footer>
+
+    <div id="product-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close" onclick="cerrarDetalle()">&times;</span>
+            <div class="modal-body">
+                <div class="modal-img-container">
+                    <img id="modal-img" src="" alt="">
+                </div>
+                <div class="modal-text-info">
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-desc"></p>
+                    <div class="modal-price-row">
+                        <span id="modal-price" class="product-price"></span>
+                        <button id="modal-btn-add" class="btn-add-cart">Añadir al Carrito 🛒</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../js/main.js"></script>
 </body>

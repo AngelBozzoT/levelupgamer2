@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Gestionar la clase activa del menú de navegación automáticamente
     gestionarMenuActivo();
+
+    // 3. Inicializar el Menú Responsivo Hamburguesa (Unificado de forma segura)
+    inicializarMenuHamburguesa();
 });
 
 /**
@@ -35,8 +38,8 @@ function gestionarMenuActivo() {
     const rutaActual = window.location.pathname;
     const nombreArchivo = rutaActual.substring(rutaActual.lastIndexOf('/') + 1);
 
-    // Seleccionar todos los enlaces de la barra de navegación
-    const enlacesNav = document.querySelectorAll(".nav-links a");
+    // CORREGIDO: Selector actualizado a ".nav-menu .btn-nav" para que coincida con tu HTML
+    const enlacesNav = document.querySelectorAll(".nav-menu .btn-nav");
 
     enlacesNav.forEach(enlace => {
         // Remover cualquier clase active previa para evitar duplicados indeseados
@@ -45,31 +48,125 @@ function gestionarMenuActivo() {
         // Obtener el atributo href del enlace del menú
         const hrefAtributo = enlace.getAttribute("href");
 
-        // Caso especial para la página de inicio (index.html o raíz "/")
-        if ((nombreArchivo === "" || nombreArchivo === "index.html") && hrefAtributo.includes("index.html")) {
-            enlace.classList.add("active");
-        } 
-        // Para las demás páginas de la carpeta de componentes
-        else if (nombreArchivo !== "" && hrefAtributo.includes(nombreArchivo)) {
-            enlace.classList.add("active");
+        if (hrefAtributo) {
+            // Caso especial para la página de inicio (index.html o raíz "/")
+            if ((nombreArchivo === "" || nombreArchivo === "index.html") && hrefAtributo.includes("index.html")) {
+                enlace.classList.add("active");
+            } 
+            // Para las demás páginas de la carpeta de componentes
+            else if (nombreArchivo !== "" && hrefAtributo.includes(nombreArchivo)) {
+                enlace.classList.add("active");
+            }
         }
     });
 }
 
 /**
- * Función global y reutilizable para simular la adición de productos al carrito
- * desde el catálogo (será usada más adelante).
+ * Inicializa y gestiona la interactividad del menú de hamburguesa de forma segura.
  */
-window.agregarAlCarritoSimulado = function() {
-    let cantidadActual = parseInt(localStorage.getItem("cart_quantity") || 0);
-    cantidadActual++;
-    
-    // Guardar el nuevo estado localmente
-    localStorage.setItem("cart_quantity", cantidadActual);
+function inicializarMenuHamburguesa() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
 
-    // Actualizar todos los contadores visuales que se encuentren en la página actual
+    // Blindaje: Solo opera si los elementos existen en la página actual
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            // Alterna la clase active para deslizar el menú desde la derecha
+            navMenu.classList.toggle('active');
+            // Alterna la clase open para transformar las barras en una 'X'
+            menuToggle.classList.toggle('open');
+        });
+
+        // Cerrar el menú si se hace clic en cualquier enlace
+        const navLinks = navMenu.querySelectorAll('.btn-nav');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('open');
+            });
+        });
+    }
+}
+
+/**
+ * Función global para añadir productos al carrito usando su código oficial.
+ * @param {string} codigoProducto - El código único (Ej: 'JM001', 'AC001')
+ */
+window.agregarAlCarritoSimulado = function(codigoProducto) {
+    // 1. Obtener el estado actual del carrito desde localStorage
+    let carrito = JSON.parse(localStorage.getItem("carrito_items")) || {};
+
+    // 2. Incrementar la cantidad del producto seleccionado o inicializarlo en 1
+    if (carrito[codigoProducto]) {
+        carrito[codigoProducto]++;
+    } else {
+        carrito[carritoProducto] = 1; // Resguardo
+        carrito[codigoProducto] = 1;
+    }
+
+    // 3. Guardar el objeto actualizado en localStorage
+    localStorage.setItem("carrito_items", JSON.stringify(carrito));
+
+    // 4. Calcular el total de productos acumulados para actualizar el Navbar
+    let cantidadTotal = Object.values(carrito).reduce((a, b) => a + b, 0);
+    localStorage.setItem("cart_quantity", cantidadTotal);
+
+    // 5. Actualizar visualmente los contadores en la página
     const contadores = document.querySelectorAll("#cart-count, .cart-widget span:last-child");
     contadores.forEach(contador => {
-        contador.textContent = cantidadActual;
+        contador.textContent = cantidadTotal;
     });
+
+    console.log(`Producto ${codigoProducto} añadido. Carrito actual:`, carrito);
 };
+
+/**
+ * Abre la ventana modal cargando dinámicamente los detalles del producto presionado.
+ */
+window.abrirDetalle = function(codigo, titulo, descripcion, imagenUrl, precio) {
+    const modal = document.getElementById("product-modal");
+    
+    // Blindaje: Verificar que la modal exista en la página antes de rellenar sus datos
+    if (modal) {
+        const titleEl = document.getElementById("modal-title");
+        const descEl = document.getElementById("modal-desc");
+        const imgEl = document.getElementById("modal-img");
+        const priceEl = document.getElementById("modal-price");
+        const btnAdd = document.getElementById("modal-btn-add");
+
+        if (titleEl) titleEl.textContent = titulo;
+        if (descEl) descEl.textContent = descripcion;
+        if (imgEl) {
+            imgEl.src = imagenUrl;
+            imgEl.alt = titulo;
+        }
+        if (priceEl) priceEl.textContent = precio;
+        
+        // Asignar el evento correcto de forma segura si el botón de añadir existe
+        if (btnAdd) {
+            btnAdd.onclick = () => {
+                window.agregarAlCarritoSimulado(codigo);
+            };
+        }
+
+        modal.style.display = "flex";
+    }
+};
+
+/**
+ * Cierra la ventana modal de detalles.
+ */
+window.cerrarDetalle = function() {
+    const modal = document.getElementById("product-modal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+};
+
+// Cerrar también si el usuario hace clic afuera de la caja central
+window.addEventListener("click", (e) => {
+    const modal = document.getElementById("product-modal");
+    if (modal && e.target === modal) {
+        modal.style.display = "none";
+    }
+});

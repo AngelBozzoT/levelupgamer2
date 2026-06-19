@@ -127,52 +127,48 @@
     color: #000000;
     box-shadow: 0 0 15px var(--verde-neon);
 }
+
 /* 1. Contenedor de la Grilla: Distribución Uniforme y Responsiva */
 .products-grid {
     display: grid;
-    /* Ajusta automáticamente el número de columnas según el espacio disponible */
-    /* Cada columna tendrá un mínimo de 250px y un máximo de 1 fracción del espacio total */
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px; /* Espaciado uniforme entre tarjetas */
+    gap: 25px;
     padding: 20px;
 }
 
 /* 2. Tarjeta del Producto: Estructura base */
 .product-card {
-    background-color: #101026; /* Fondo oscuro futurista */
-    border: 1px solid #3d1466; /* Bordes violetas discretos */
+    background-color: #101026;
+    border: 1px solid #3d1466;
     border-radius: 12px;
     overflow: hidden;
     display: flex;
-    flex-direction: column; /* Alinea los elementos verticalmente */
-    justify-content: space-between; /* Empuja el botón y precio siempre al fondo */
+    flex-direction: column;
+    justify-content: space-between;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(147, 51, 234, 0.3); /* Resplandor neón violeta al pasar el mouse */
+    box-shadow: 0 8px 20px rgba(147, 51, 234, 0.3);
 }
 
 /* 3. Contenedor de la Imagen: Fuerza un tamaño estricto e igualitario */
-/* 1. El contenedor mantiene el tamaño fijo obligatorio */
 .product-img-container {
     width: 100%;
     height: 220px !important; 
-    background-color: #ffffff; /* CAMBIO: Fondo blanco para que los productos de internet se fusionen perfectamente */
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 15px; /* Margen interno para que el producto no toque los bordes */
+    padding: 15px;
     border-bottom: 1px solid #151535;
 }
 
-/* 2. La imagen se adapta por completo sin perder calidad */
 .product-img-container img {
     width: 100% !important;
     height: 100% !important;
-    /* EL TRUCO: Muestra la imagen COMPLETA dentro del espacio, sin importar si es alta o ancha */
     object-fit: contain !important; 
     object-position: center !important;
     transition: transform 0.3s ease;
@@ -181,38 +177,312 @@
 /* Efecto visual sutil al pasar el mouse */
 .product-card:hover .product-img-container img {
     transform: scale(1.08);
+} /* <-- CORREGIDO: Aquí faltaba esta llave de cierre */
 
 /* 5. Contenido de Información de la Tarjeta */
 .product-info {
-    padding: 15px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Hace que el bloque de texto ocupe el espacio restante de forma equitativa */
+    gap: 15px;
+    flex-grow: 1;
 }
 
 .product-title {
-    font-size: 1.1rem;
-    color: #ffffff;
-    margin-bottom: 8px;
-    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--texto-blanco);
+    font-family: var(--fuente-titulos);
+    margin: 0;
 }
 
-.product-description {
-    font-size: 0.85rem;
-    color: #b3b3cc;
-    line-height: 1.4;
-    margin-bottom: 15px;
-    /* Limita las descripciones a un máximo de 3 líneas para que las tarjetas midan lo mismo */
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* 6. Fila de Precio y Botón al fondo */
 .product-price-row {
-    margin-top: auto; /* Empuja esta fila al fondo exacto de la tarjeta de forma simétrica */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--texto-blanco);
+    font-family: var(--fuente-titulos);
+}
+
+/* 6. Botón "Añadir al Carrito" Estilo Cyberpunk (Tamaño Uniforme Simétrico) */
+.product-card .btn-add-cart {
+    /* Forzamos a que todos midan exactamente lo mismo sin importar el texto */
+    width: 115px; 
+    height: 38px;
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    
+    background: transparent;
+    color: var(--verde-neon);
+    border: 1px solid var(--verde-neon);
+    
+    /* Usamos un padding interno pequeño y fijo */
+    padding: 0 8px; 
+    
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.2);
+    
+    /* Evita que paddings o bordes alteren el tamaño asignado */
+    box-sizing: border-box; 
+}
+.product-card .btn-add-cart:hover {
+    background-color: var(--verde-neon);
+    color: #05050f;
+    box-shadow: 0 0 15px var(--verde-neon);
+    transform: translateY(-2px);
+}
+
+.product-card .btn-add-cart:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+    VENTANA MODAL DE DETALLES (POP-UP)
+   ========================================================================== */
+
+/* Fondo oscurecido translúcido */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 5, 15, 0.85);
+    backdrop-filter: blur(5px);
+    display: none; /* Controlado dinámicamente por JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* Caja contenedora del detalle */
+.modal-content {
+    background-color: #0d0d21;
+    border: 2px solid var(--azul-electrico);
+    box-shadow: 0 0 25px rgba(30, 144, 255, 0.4);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 700px;
+    padding: 30px;
+    position: relative;
+    animation: fadeInModal 0.3s ease;
+    box-sizing: border-box;
+}
+
+@keyframes fadeInModal {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Botón para cerrar (X) */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--texto-mutado);
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    color: var(--verde-neon);
+}
+
+/* Cuerpo de la modal en dos columnas */
+.modal-body {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.modal-img-container {
+    flex: 1;
+    min-width: 250px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    box-sizing: border-box;
+}
+
+.modal-img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.modal-text-info {
+    flex: 1.2;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-text-info h2 {
+    color: var(--texto-blanco);
+    font-size: 1.8rem;
+    font-family: var(--fuente-titulos);
+    margin: 0;
+}
+
+.modal-text-info p {
+    color: var(--texto-mutado);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Fila de Precio y Ajuste de Botón Interno */
+.modal-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid #1f1f45; /* Línea cyberpunk sutil */
+    padding-top: 15px;
+}
+
+/* Botón "Añadir al Carrito" dentro de la Ventana Modal */
+.btn-add-cart-modal {
+    width: 170px;
+    height: 42px;
+    background: transparent;
+    color: var(--verde-neon);
+    border: 2px solid var(--verde-neon);
+    font-family: var(--fuente-titulos);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+    box-sizing: border-box;
+}
+
+.btn-add-cart-modal:hover {
+    background-color: var(--verde-neon);
+    color: #05050f;
+    box-shadow: 0 0 18px var(--verde-neon);
+    transform: translateY(-2px);
+}
+
+.btn-add-cart-modal:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+    RESPONSIVE: MENÚ HAMBURGUESA Y MODAL (Pantallas < 768px)
+   ========================================================================== */
+
+/* Botón Hamburguesa oculto por defecto en escritorio */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 3100;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--texto-blanco);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* Aparece la hamburguesa */
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background-color: rgba(13, 13, 33, 0.95);
+        backdrop-filter: blur(10px);
+        border-left: 2px solid var(--azul-electrico);
+        flex-direction: column;
+        justify-content: center;
+        gap: 25px;
+        transition: right 0.4s ease;
+        padding: 40px;
+        box-shadow: -10px 0 25px rgba(0,0,0,0.5);
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .btn-nav {
+        width: 100%;
+        text-align: center;
+        font-size: 1.1rem;
+        padding: 12px;
+    }
+
+    .menu-toggle.open .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+        background-color: var(--verde-neon);
+    }
+    .menu-toggle.open .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.open .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+        background-color: var(--verde-neon);
+    }
+
+    /* ADAPTACIÓN DE LA MODAL PARA MÓVILES */
+    .modal-content {
+        padding: 20px;
+        width: 95%;
+    }
+
+    .modal-body {
+        flex-direction: column; /* Apila la imagen arriba y el texto abajo */
+        gap: 20px;
+    }
+
+    .modal-img-container {
+        width: 100%;
+        height: 200px; /* Reducimos un poco la altura en celulares */
+    }
+
+    .modal-text-info h2 {
+        font-size: 1.4rem; /* Texto levemente más pequeño en celulares */
+    }
 }

@@ -125,3 +125,27 @@
     border-top: 1px solid #151530;
     margin-top: auto; /* Empuja el footer siempre hacia abajo en páginas cortas */
 }
+/* --- ESTILOS BASE HEADER --- */
+.main-header {
+    background-color: #05050f;
+    border-bottom: 2px solid var(--azul-electrico);
+    position: sticky;
+    top: 0;
+    z-index: 3000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
