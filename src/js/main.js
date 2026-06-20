@@ -1,18 +1,63 @@
-/* ==========================================================================
-   Lógica General e Interactividad Global - Level-Up Gamer
-   ========================================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Inicializar el estado del carrito de compras local
+    // 1. Inicializar el catálogo dinámico de productos
+    renderizarProductosDestacados();
+
+    // 2. Inicializar el estado del carrito de compras local
     inicializarCarrito();
 
-    // 2. Gestionar la clase activa del menú de navegación automáticamente
+    // 3. Gestionar la clase activa del menú de navegación automáticamente
     gestionarMenuActivo();
 
-    // 3. Inicializar el Menú Responsivo Hamburguesa (Unificado de forma segura)
+    // 4. Inicializar el Menú Responsivo Hamburguesa
     inicializarMenuHamburguesa();
 });
 
+/**
+ * Renderiza dinámicamente en la grilla principal solo los productos marcados como destacados.
+ */
+function renderizarProductosDestacados() {
+    const contenedorGrid = document.getElementById("productos-destacados");
+    const productos = window.catalogoHardware;
+
+    // Blindaje: Validar que el contenedor exista en la página (Index) y que los datos estén cargados
+    if (!contenedorGrid || !productos) return;
+
+    // Limpiar el mensaje de "Cargando catálogo..."
+    contenedorGrid.innerHTML = "";
+
+    // Filtrar los productos para mostrar solo los que tengan destacado: true
+    const productosDestacados = productos.filter(p => p.destacado);
+
+    if (productosDestacados.length === 0) {
+        contenedorGrid.innerHTML = `<p class="loading-text">No hay productos destacados disponibles en este momento.</p>`;
+        return;
+    }
+
+    // Construir e inyectar dinámicamente las tarjetas de hardware
+    productosDestacados.forEach(prod => {
+        const tarjetaHTML = `
+            <div class="product-card" data-codigo="${prod.codigo}">
+                <div class="product-img-container">
+                    <img src="${prod.imagen}" alt="${prod.titulo}" class="product-img" onerror="this.src='https://via.placeholder.com/250x200?text=Hardware+Image'">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">${prod.categoria.toUpperCase()}</span>
+                    <h4>${prod.titulo}</h4>
+                    <p class="product-price">${prod.precio}</p>
+                    <div class="product-actions">
+                        <button class="btn-secondary" onclick="abrirDetalle('${prod.codigo}', '${prod.titulo}', '${prod.descripcion}', '${prod.imagen}', '${prod.precio}')">
+                            Ver Detalles
+                        </button>
+                        <button class="btn-primary" onclick="agregarAlCarritoSimulado('${prod.codigo}')">
+                            🛒 Añadir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        contenedorGrid.innerHTML += tarjetaHTML;
+    });
+}
 /**
  * Controla el widget del carrito de compras simulando la persistencia local.
  */
