@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Inventario - Level-Up Gamer</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/tienda.css">
+</head>
+<body>
+
+    <header class="main-header">
+        </header>
+
+    <main class="carrito-page-container">
+        <h1 class="carrito-title">TU <span class="neon-blue">INVENTARIO</span></h1>
+
+        <div class="carrito-grid">
+            <section class="carrito-items-section">
+                <div id="cart-vacio" class="cart-empty-msg" style="display: none;">
+                    <p>No tienes productos en tu inventario de compra.</p>
+                    <a href="productos.html" class="btn-continuar">Explorar Productos</a>
+                </div>
+                
+                <div id="cart-items-page-list"></div>
+            </section>
+
+            <aside class="carrito-summary-section">
+                <div class="summary-card">
+                    <h3>RESUMEN DEL PEDIDO</h3>
+                    <hr class="summary-divider">
+                    <div class="summary-row">
+                        <span>Subtotal (<span id="total-articulos">0</span> items)</span>
+                        <span id="subtotal-precio">$0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Envío</span>
+                        <span class="muted-text">Por calcular</span>
+                    </div>
+                    <hr class="summary-divider">
+                    <div class="summary-row total-row">
+                        <strong>Total</strong>
+                        <strong id="precio-total" class="neon-price">$0</strong>
+                    </div>
+                    <button class="btn-checkout" onclick="finalizarPedido()">IR A PAGAR →</button>
+                    <a href="productos.html" class="link-back">Continuar comprando</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="../js/productos.js"></script>
+</body>
+</html>

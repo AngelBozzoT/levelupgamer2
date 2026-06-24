@@ -514,3 +514,285 @@
         font-size: 1.4rem; /* Texto levemente más pequeño en celulares */
     }
 }
+/* Contenedor General */
+.nosotros-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Encabezado */
+.nosotros-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.nosotros-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.neon-green {
+    color: #10ff5a;
+    text-shadow: 0 0 15px rgba(16, 255, 90, 0.6);
+}
+
+.nosotros-header .subtitle {
+    color: #aaa;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Bloque Historia (Flexbox de 2 columnas) */
+.history-block {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 80px;
+}
+
+.history-text {
+    flex: 1;
+}
+
+.history-text h2 {
+    color: #00bfff;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.history-text p {
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+/* Imagen con curvas y brillo de fondo */
+.history-image-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.history-img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+    /* Efecto sutil de relieve o sombra brillante trasera */
+    box-shadow: 0 0 30px rgba(0, 191, 255, 0.15); 
+}
+
+/* Grid de Tarjetas (4 Columnas) */
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* Base de las tarjetas individuales */
+.pillar-card {
+    background-color: #07070c; /* Fondo gris/negro muy oscuro */
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pillar-card:hover {
+    transform: translateY(-5px);
+}
+
+.pillar-card h3 {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin: 15px 0 10px 0;
+}
+
+.pillar-card p {
+    color: #888;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Estilos de bordes personalizados por pilar */
+.border-blue { border: 1px solid rgba(0, 191, 255, 0.2); }
+.border-blue:hover { box-shadow: 0 0 15px rgba(0, 191, 255, 0.2); }
+
+.border-green { border: 1px solid rgba(16, 255, 90, 0.2); }
+.border-green:hover { box-shadow: 0 0 15px rgba(16, 255, 90, 0.2); }
+
+.border-light-blue { border: 1px solid rgba(30, 144, 255, 0.2); }
+.border-light-blue:hover { box-shadow: 0 0 15px rgba(30, 144, 255, 0.2); }
+
+.border-emerald { border: 1px solid rgba(56, 239, 125, 0.2); }
+.border-emerald:hover { box-shadow: 0 0 15px rgba(56, 239, 125, 0.2); }
+
+/* Colores de Iluminación para los Íconos */
+.pillar-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.icon-blue { text-shadow: 0 0 10px #00bfff; }
+.icon-green { text-shadow: 0 0 10px #10ff5a; }
+.icon-light-blue { text-shadow: 0 0 10px #1e90ff; }
+.icon-emerald { text-shadow: 0 0 10px #38ef7d; }
+
+/* Responsive para pantallas medianas o celulares */
+@media (max-width: 768px) {
+    .history-block {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .nosotros-header h1 {
+        font-size: 2.2rem;
+    }
+}
+/* Contenedor General del Blog */
+.blog-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Encabezado */
+.blog-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.blog-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.blog-header .subtitle {
+    color: #aaa;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grid de Tarjetas (3 Columnas fluidas) */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* Estructura Base de la Tarjeta del Blog */
+.blog-card {
+    background-color: #07070c; /* Mismo fondo oscuro de Nosotros */
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 1. El cuadro contenedor de la imagen del blog */
+/* El contenedor (la caja blanca) */
+.blog-img-wrapper {
+    width: 100%;
+    height: 220px;
+    background-color: #fff; /* Tu fondo blanco */
+    display: flex;
+    align-items: center;    /* La mantiene al centro verticalmente sin recortar */
+    justify-content: center;/* La mantiene al centro horizontalmente */
+    padding: 15px;
+    box-sizing: border-box;
+    overflow: hidden;       /* Evita que cualquier cosa se salga del cuadro */
+}
+
+/* La imagen (CORREGIDA) */
+.blog-card-img {
+    width: auto;
+    height: auto;
+    max-width: 100%;       /* 🔥 Fuerza a que no supere el ancho del cuadro */
+    max-height: 100%;      /* 🔥 Fuerza a que no supere el alto del cuadro */
+    object-fit: contain;   /* ✨ Esta es la clave: escala la imagen completa sin recortar nada */
+}
+
+/* 3. Efecto hover sutil (opcional) */
+.blog-card:hover .blog-card-img {
+    transform: scale(1.03); /* Un zoom muy leve sin salirse de la caja */
+}
+/* Cuerpo del texto interno */
+.blog-card-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.blog-category {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.blog-card-content h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 12px 0;
+    color: #fff;
+}
+
+.blog-card-content p {
+    color: #888;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Footer interno de la tarjeta */
+.blog-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Empuja el footer siempre al fondo */
+    padding-top: 15px;
+    border-top: 1px solid rgb(203, 13, 241);
+}
+
+.blog-date {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.blog-link {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* Variaciones de Color de Bordes y Efecto Glow Neón */
+.border-blue { border: 1px solid rgba(0, 191, 255, 0.15); }
+.border-blue:hover { box-shadow: 0 0 20px rgba(0, 191, 255, 0.25); }
+.text-blue { color: #00bfff; }
+.link-blue { color: #00bfff; }
+
+.border-green { border: 1px solid rgba(16, 255, 90, 0.15); }
+.border-green:hover { box-shadow: 0 0 20px rgba(16, 255, 90, 0.25); }
+.text-green { color: #10ff5a; }
+.link-green { color: #10ff5a; }
+
+.border-purple { border: 1px solid rgba(138, 43, 226, 0.15); }
+.border-purple:hover { box-shadow: 0 0 20px rgba(138, 43, 226, 0.25); }
+.text-purple { color: #a020f0; }
+.link-purple { color: #a020f0; }

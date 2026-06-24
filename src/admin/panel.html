@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo | Level-Up Gamer</title>
+    <link rel="stylesheet" href="../src/css/main.css">
+    <link rel="stylesheet" href="../src/css/admin.css">
+</head>
+<body>
+
+    <div class="admin-container">
+        
+        <aside class="admin-sidebar">
+            <div class="sidebar-brand">
+                <img src="../src/assets/Logo.png" alt="Logo Level-Up" class="sidebar-logo" onerror="this.src='https://via.placeholder.com/50x50/101026/ffffff?text=Logo'">
+                <h3>Level-Up Admin</h3>
+            </div>
+            
+            <nav class="admin-nav">
+                <ul class="sidebar-menu">
+                    <li><a class="sidebar-link active" onclick="switchSection('dashboard', event)">Panel General</a></li>
+                    <li><a class="sidebar-link" onclick="switchSection('productos', event)">Mantenedor Productos</a></li>
+                    <li><a class="sidebar-link" onclick="switchSection('usuarios', event)">Mantenedor Usuarios</a></li>
+                </ul>
+                
+                <a href="../index.html" class="sidebar-link logout">Cerrar Sesión / Salir</a>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            
+            <section id="sec-dashboard" class="admin-section active-section">
+                <h2 class="admin-header-title">Panel General Informativo</h2>
+                <p class="admin-subtitle">Bienvenido al sistema de administración. Seleccione un mantenedor en el menú izquierdo para configurar la plataforma.</p>
+                
+                <div class="dashboard-cards-grid">
+                    <div class="stat-card blue">
+                        <h4>PRODUCTOS EN TIENDA</h4>
+                        <p>12</p>
+                    </div>
+                    <div class="stat-card green">
+                        <h4>USUARIOS REGISTRADOS</h4>
+                        <p>45</p>
+                    </div>
+                    <div class="stat-card red">
+                        <h4>ALERTAS DE STOCK</h4>
+                        <p>2</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-productos" class="admin-section">
+                <h2 class="admin-header-title">Gestión de Catálogo de Hardware</h2>
+                <p class="admin-subtitle">Módulo de control para agregar, editar o dar de baja insumos de hardware y merchandising.</p>
+                
+                <div class="btn-create-section">
+                    <button class="btn-admin-primary" onclick="openForm('producto', 'create')">+ Agregar Nuevo Producto</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="crud-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Estado/Alerta</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-productos-body">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div id="form-producto-container" class="admin-form-box" style="display: none;">
+                    <h3 id="form-producto-title">Nuevo Producto</h3>
+                    <form id="form-admin-producto" novalidate>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="prod-codigo">Código de Producto *</label>
+                                <input type="text" id="prod-codigo" class="form-input" placeholder="Ej: JM002">
+                                <small class="error-message" id="error-prod-codigo"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="prod-nombre">Nombre del Producto *</label>
+                                <input type="text" id="prod-nombre" class="form-input" placeholder="Nombre de despliegue">
+                                <small class="error-message" id="error-prod-nombre"></small>
+                            </div>
+                            <div class="form-group-full">
+                                <label class="form-label" for="prod-descripcion">Descripción Corta / Atributos</label>
+                                <textarea id="prod-descripcion" class="form-input" rows="3" placeholder="Especificaciones..."></textarea>
+                                <small class="error-message" id="error-prod-descripcion"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="prod-precio">Precio ($) *</label>
+                                <input type="number" id="prod-precio" class="form-input" placeholder="Ej: 29990">
+                                <small class="error-message" id="error-prod-precio"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="prod-stock">Stock Inicial *</label>
+                                <input type="number" id="prod-stock" class="form-input" placeholder="Unidades disponibles">
+                                <small class="error-message" id="error-prod-stock"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="prod-categoria">Categoría *</label>
+                                <select id="prod-categoria" class="form-input">
+                                    <option value="">Seleccione Categoría</option>
+                                    <option value="vestuario">Vestuario</option>
+                                    <option value="perifericos">Periféricos</option>
+                                    <option value="hardware">Hardware Insumos</option>
+                                </select>
+                                <small class="error-message" id="error-prod-categoria"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="prod-stock-critico">Stock Crítico Alerta</label>
+                                <input type="number" id="prod-stock-critico" class="form-input" placeholder="Mínimo aceptable">
+                                <small class="error-message" id="error-prod-stock-critico"></small>
+                            </div>
+                        </div>
+                        <div class="form-actions-area">
+                            <button type="button" class="btn-action btn-delete" onclick="closeForm('producto')">Cancelar</button>
+                            <button type="submit" class="btn-admin-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="sec-usuarios" class="admin-section">
+                <h2 class="admin-header-title">Administración y Roles de Usuarios</h2>
+                <p class="admin-subtitle">Mantenedor crítico de control de identidad y privilegios.</p>
+                
+                <div class="btn-create-section">
+                    <button class="btn-admin-primary" onclick="openForm('usuario', 'create')">+ Crear Nuevo Usuario</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="crud-table">
+                        <thead>
+                            <tr>
+                                <th>RUN</th>
+                                <th>Nombre Completo</th>
+                                <th>Correo Electrónico</th>
+                                <th>Perfil / Rol</th>
+                                <th>Región / Comuna</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-usuarios-body">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div id="form-usuario-container" class="admin-form-box" style="display: none;">
+                    <h3 id="form-usuario-title">Nuevo Usuario</h3>
+                    <form id="form-admin-usuario" novalidate>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="user-run">RUN (Sin puntos ni guion) *</label>
+                                <input type="text" id="user-run" class="form-input" placeholder="Ej: 19011022K">
+                                <small class="error-message" id="error-user-run"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="user-nombre">Nombre *</label>
+                                <input type="text" id="user-nombre" class="form-input">
+                                <small class="error-message" id="error-user-nombre"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="user-apellidos">Apellidos *</label>
+                                <input type="text" id="user-apellidos" class="form-input">
+                                <small class="error-message" id="error-user-apellidos"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="user-correo">Correo Electrónico *</label>
+                                <input type="email" id="user-correo" class="form-input">
+                                <small class="error-message" id="error-user-correo"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="user-perfil">Tipo de Usuario / Rol *</label>
+                                <select id="user-perfil" class="form-input">
+                                    <option value="">Seleccione un Rol</option>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Vendedor">Vendedor</option>
+                                    <option value="Cliente">Cliente</option>
+                                </select>
+                                <small class="error-message" id="error-user-perfil"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="user-region">Región *</label>
+                                <select id="user-region" class="form-input">
+                                    <option value="">Seleccione una región</option>
+                                    <option value="RM">Región Metropolitana de Santiago</option>
+                                    <option value="Valparaiso">Región de Valparaíso</option>
+                                </select>
+                                <small class="error-message" id="error-user-region"></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="user-comuna">Comuna *</label>
+                                <select id="user-comuna" class="form-input" disabled>
+                                    <option value="">Seleccione primero una región</option>
+                                </select>
+                                <small class="error-message" id="error-user-comuna"></small>
+                            </div>
+                            <div class="form-group-full">
+                                <label class="form-label" for="user-direccion">Dirección de Despacho *</label>
+                                <input type="text" id="user-direccion" class="form-input">
+                                <small class="error-message" id="error-user-direccion"></small>
+                            </div>
+                        </div>
+                        <div class="form-actions-area">
+                            <button type="button" class="btn-action btn-delete" onclick="closeForm('usuario')">Cancelar</button>
+                            <button type="submit" class="btn-admin-primary">Guardar Usuario</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="../src/js/datos_admin.js"></script>
+    <script src="../src/js/comunas.js"></script>
+    <script src="../src/js/validaciones_admin.js"></script>
+    
+    <script>
+        function switchSection(sectionId, event) {
+            document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active-section'));
+            document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
+            
+            document.getElementById('sec-' + sectionId).classList.add('active-section');
+            event.target.classList.add('active');
+            
+            closeForm('producto');
+            closeForm('usuario');
+        }
+
+        function openForm(type, mode, id = null) {
+            const container = document.getElementById(`form-${type}-container`);
+            const title = document.getElementById(`form-${type}-title`);
+            container.style.display = "block";
+            
+            if(mode === 'create') {
+                title.innerText = type === 'producto' ? "Nuevo Producto" : "Nuevo Usuario";
+                container.classList.remove('form-edit-mode');
+                document.getElementById(`form-admin-${type}`).reset();
+                if(type === 'usuario') document.getElementById('user-comuna').disabled = true;
+            } else {
+                title.innerText = type === 'producto' ? `Editar Producto: ${id}` : `Editar Usuario: ${id}`;
+                container.classList.add('form-edit-mode');
+            }
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeForm(type) {
+            document.getElementById(`form-${type}-container`).style.display = "none";
+        }
+    </script>
+</body>
+</html>
