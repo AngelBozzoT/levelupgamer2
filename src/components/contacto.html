@@ -26,67 +26,92 @@
                 <a href="productos.html" class="btn-nav">Productos</a>
                 <a href="nosotros.html" class="btn-nav">Nosotros</a>
                 <a href="blogs.html" class="btn-nav">Blogs</a>
-                <a href="contacto.html" class="btn-nav active">Contacto</a>
+                <a href="contacto.html" class="btn-nav">Contacto</a>
                 <a href="registro.html" class="btn-nav signup">Registrarse</a>
                 <a href="login.html" class="btn-nav">Iniciar Sesión</a>
-                <a href="carrito.html" class="btn-nav cart-widget" style="border: none; background: transparent; box-shadow: none;">
+                
+                <a href="carrito.html" class="cart-widget">
                     🛒 Carrito (<span id="cart-count">0</span>)
                 </a>
+                <div id="user-profile-container" class="profile-dropdown-container"></div>
             </nav>
         </div>
     </header>
 
-    <main class="main-content flex-center">
-        <section class="form-container">
-            <h2>FORMULARIO DE CONTACTOS</h2>
-            <p class="form-subtitle">¿Tienes dudas o necesitas soporte técnico? Escríbenos directamente.</p>
+<main class="contacto-container">
+    <section class="contacto-header">
+        <h1>CONTÁCTA<span class="neon-blue">NOS</span></h1>
+        <p class="subtitle">¿Tienes dudas sobre un producto o armado de PC? Nuestro equipo de expertos está listo para ayudarte.</p>
+    </section>
 
-            <form id="form-contacto" novalidate>
-                
-                <div class="form-group">
-                    <label for="contacto-nombre">Nombre Completo *</label>
-                    <input 
-                        type="text" 
-                        id="contacto-nombre" 
-                        name="nombre" 
-                        placeholder="Ej: Juan Pérez"
-                        maxlength="100"
-                    >
-                    <small class="error-message" id="error-contacto-nombre"></small>
+    <div class="contacto-grid">
+        
+        <section class="contacto-info-card">
+            <h2>INFORMACIÓN DE CONTACTO</h2>
+            
+            <div class="info-item">
+                <div class="info-icon icon-phone">
+                    📞
                 </div>
-
-                <div class="form-group">
-                    <label for="contacto-correo">Correo Electrónico *</label>
-                    <input 
-                        type="email" 
-                        id="contacto-correo" 
-                        name="correo" 
-                        placeholder="Ej: nombre@inacap.cl, @profesor.inacap.cl o @gmail.com"
-                        maxlength="100"
-                    >
-                    <small class="error-message" id="error-contacto-correo"></small>
+                <div class="info-text">
+                    <span class="info-label">WhatsApp Soporte</span>
+                    <span class="info-value">+56 9 1234 5678</span>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="contacto-comentario">Mensaje o Comentario *</label>
-                    <textarea 
-                        id="contacto-comentario" 
-                        name="comentario" 
-                        rows="6" 
-                        placeholder="Escribe tu mensaje aquí..."
-                        maxlength="500"
-                    ></textarea>
-                    <div class="character-counter">
-                        <span id="current-chars">0</span>/500 caracteres
+            <div class="info-item">
+                <div class="info-icon icon-email">
+                    ✉️
+                </div>
+                <div class="info-text">
+                    <span class="info-label">Correo Electrónico</span>
+                    <span class="info-value">soporte@levelupgamer.cl</span>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon icon-location">
+                    📍
+                </div>
+                <div class="info-text">
+                    <span class="info-label">Tienda Física</span>
+                    <span class="info-value">Av. Providencia 1234, Santiago</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="contacto-form-card">
+            <h2>ENVÍANOS UN MENSAJE</h2>
+            <form id="form-contacto" action="#" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" placeholder="Tu nombre" required>
                     </div>
-                    <small class="error-message" id="error-contacto-comentario"></small>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="tu@email.com" required>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn-submit">ENVIAR MENSAJE</button>
+                <div class="form-group">
+                    <label for="asunto">Asunto</label>
+                    <input type="text" id="asunto" placeholder="Ej: Consulta sobre armado PC" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" rows="5" placeholder="¿En qué te podemos ayudar?" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-enviar">
+                    <span>⚡ Enviar Mensaje</span>
+                </button>
             </form>
         </section>
-    </main>
 
+    </div>
+</main>
     <footer class="main-footer">
         <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
     </footer>

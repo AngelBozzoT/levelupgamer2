@@ -6,6 +6,13 @@
     <title>Panel Administrativo | Level-Up Gamer</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <script>
+        // Bloqueo de Seguridad: Si no es admin, es devuelto al login inmediatamente
+        if (localStorage.getItem("isAdmin") !== "true") {
+            alert("Acceso denegado. Por favor, inicie sesión como administrador.");
+            window.location.href = "../components/login.html"; 
+        }
+    </script>
 </head>
 <body>
 
@@ -72,7 +79,7 @@
                             </tr>
                         </thead>
                         <tbody id="tabla-productos-body">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
 
@@ -161,7 +168,7 @@
                             </tr>
                         </thead>
                         <tbody id="tabla-usuarios-body">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
 
@@ -288,6 +295,22 @@
             document.getElementById(`form-${type}-container`).style.display = "none";
             window.adminEditState = null;
         }
+
+        // Evento operativo para cerrar sesión interceptando los enlaces correctos
+        document.addEventListener("DOMContentLoaded", function() {
+            const enlaces = document.querySelectorAll("a, button");
+            enlaces.forEach(el => {
+                if(el.textContent.includes("Cerrar Sesión") || el.textContent.includes("Salir")) {
+                    el.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        localStorage.removeItem("isAdmin");
+                        localStorage.setItem("logout_manual", "true");
+                        alert("Sesión administrativa finalizada.");
+                        window.location.href = "../../index.html";
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>

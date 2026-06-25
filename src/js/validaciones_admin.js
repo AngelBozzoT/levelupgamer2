@@ -14,7 +14,54 @@ function validarFormatoRUNAdmin(valor) {
     return limpio.length >= 7 && limpio.length <= 9;
 }
 
+/**
+ * CONTROL DE ACCESO ABSOLUTO (LOGIN ADMINISTRADOR)
+ * Esta función es invocada directamente por el 'onsubmit' del formulario en login.html
+ * Intercepta de manera segura el flujo para evitar que el navegador recargue al Home.
+ */
+function procesarLoginOperacional(e) {
+    // 1. Frenar inmediatamente el comportamiento nativo de recarga
+    e.preventDefault(); 
+    
+    const userInput = document.getElementById("login-correo"); // Sincronizado con el ID del HTML
+    const passInput = document.getElementById("login-password");
+    const errLogin = document.getElementById("error-login-global");
+
+    if (!userInput || !passInput) {
+        console.error("Error: No se encontraron los elementos input en el DOM.");
+        return false;
+    }
+
+    const usuario = userInput.value.trim();
+    const password = passInput.value.trim();
+
+// 2. Validación de credenciales estáticas estipuladas
+// 2. Validación de credenciales estáticas estipuladas
+    if (usuario === "admin" && password === "admin123") {
+        localStorage.setItem("isAdmin", "true");
+        
+        // ¡AGREGA ESTA LÍNEA AQUÍ! Limpia el bloqueo manual para reactivar el flujo dinámico
+        localStorage.removeItem("logout_manual");
+        
+        alert("¡Autenticación exitosa! Bienvenido al Panel de Control.");
+        
+        window.location.replace("../admin/panel.html");
+        return true;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+
+    // ==========================================
+    // SECCIÓN RESPALDADA DE INGRESO TRADICIONAL
+    // ==========================================
+    const formLogin = document.getElementById("form-login"); 
+    if (formLogin) {
+        formLogin.addEventListener("submit", function (e) {
+            // Se complementa con la lógica operacional superior
+            procesarLoginOperacional(e);
+        });
+    }
 
     // ==========================================
     // MANTENEDOR DE PRODUCTOS
@@ -142,7 +189,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const comunaSelect = document.getElementById("user-comuna");
 
         if (regionSelect && comunaSelect && window.regionesData) {
-            // Limpiar opciones de ejemplo que traía el HTML y reemplazarlas por el listado completo
             regionSelect.innerHTML = '<option value="">Seleccione una región</option>';
             window.regionesData.forEach(region => {
                 const opt = document.createElement("option");
