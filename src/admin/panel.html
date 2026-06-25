@@ -260,7 +260,6 @@
             const container = document.getElementById(`form-${type}-container`);
             const title = document.getElementById(`form-${type}-title`);
             container.style.display = "block";
-
             if(mode === 'create') {
                 title.innerText = type === 'producto' ? "Nuevo Producto" : "Nuevo Usuario";
                 container.classList.remove('form-edit-mode');
