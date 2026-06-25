@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level-Up Gamer | Home</title>
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/layout.css">
+    <link rel="stylesheet" href="src/css/componentes.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <img src="src/assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img">
+                <span class="logo-text">LEVEL-UP GAMER</span>
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="nav-menu">
+                <a href="index.html" class="btn-nav active">Home</a>
+                <a href="src/components/productos.html" class="btn-nav">Productos</a>
+                <a href="src/components/nosotros.html" class="btn-nav">Nosotros</a>
+                <a href="src/components/blogs.html" class="btn-nav">Blogs</a>
+                <a href="src/components/contacto.html" class="btn-nav">Contacto</a>
+                <a href="src/components/registro.html" class="btn-nav signup">Registrarse</a>
+                <a href="src/components/login.html" class="btn-nav">Iniciar Sesión</a>
+                
+                <a href="src/components/carrito.html" class="cart-widget">
+                    🛒 Carrito (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="hero-text">
+                <h2>¡DESAFÍA TUS LÍMITES CON LEVEL-UP GAMER!</h2>
+                <p>Conviértete en el héroe de tu propia historia y únete a nuestra comunidad de jugadores. ¡Explora, juega y gana con nosotros!</p>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="src/assets/imagenlevelup.png" alt="Level-Up Gamer Arena">
+            </div>
+        </section>
+
+        <section class="featured-section">
+            <h3>Productos Destacados</h3>
+            <div class="products-grid" id="productos-destacados">
+                <p class="loading-text">Cargando catálogo de hardware...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
+    </footer>
+
+    <script src="src/js/productos.js"></script>
+    <script src="src/js/cart.js"></script>
+    <script src="src/js/main.js"></script>
+</body>
+</html>

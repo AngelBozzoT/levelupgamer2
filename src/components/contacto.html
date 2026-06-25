@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Level-Up Gamer</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo-container">
+                <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
+                <span class="logo-text">LEVEL-UP GAMER</span>
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="nav-menu">
+                <a href="../../index.html" class="btn-nav">Home</a>
+                <a href="productos.html" class="btn-nav">Productos</a>
+                <a href="nosotros.html" class="btn-nav">Nosotros</a>
+                <a href="blogs.html" class="btn-nav">Blogs</a>
+                <a href="contacto.html" class="btn-nav active">Contacto</a>
+                <a href="registro.html" class="btn-nav signup">Registrarse</a>
+                <a href="login.html" class="btn-nav">Iniciar Sesión</a>
+                <a href="carrito.html" class="btn-nav cart-widget" style="border: none; background: transparent; box-shadow: none;">
+                    🛒 Carrito (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content flex-center">
+        <section class="form-container">
+            <h2>FORMULARIO DE CONTACTOS</h2>
+            <p class="form-subtitle">¿Tienes dudas o necesitas soporte técnico? Escríbenos directamente.</p>
+
+            <form id="form-contacto" novalidate>
+                
+                <div class="form-group">
+                    <label for="contacto-nombre">Nombre Completo *</label>
+                    <input 
+                        type="text" 
+                        id="contacto-nombre" 
+                        name="nombre" 
+                        placeholder="Ej: Juan Pérez"
+                        maxlength="100"
+                    >
+                    <small class="error-message" id="error-contacto-nombre"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="contacto-correo">Correo Electrónico *</label>
+                    <input 
+                        type="email" 
+                        id="contacto-correo" 
+                        name="correo" 
+                        placeholder="Ej: nombre@inacap.cl, @profesor.inacap.cl o @gmail.com"
+                        maxlength="100"
+                    >
+                    <small class="error-message" id="error-contacto-correo"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="contacto-comentario">Mensaje o Comentario *</label>
+                    <textarea 
+                        id="contacto-comentario" 
+                        name="comentario" 
+                        rows="6" 
+                        placeholder="Escribe tu mensaje aquí..."
+                        maxlength="500"
+                    ></textarea>
+                    <div class="character-counter">
+                        <span id="current-chars">0</span>/500 caracteres
+                    </div>
+                    <small class="error-message" id="error-contacto-comentario"></small>
+                </div>
+
+                <button type="submit" class="btn-submit">ENVIAR MENSAJE</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
+    </footer>
+
+    <script src="../js/validaciones.js"></script>
+    <script src="../js/productos.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

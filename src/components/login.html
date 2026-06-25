@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | Level-Up Gamer</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo-container">
+                <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
+                <span class="logo-text">LEVEL-UP GAMER</span>
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="nav-menu">
+                <a href="../../index.html" class="btn-nav">Home</a>
+                <a href="productos.html" class="btn-nav">Productos</a>
+                <a href="nosotros.html" class="btn-nav">Nosotros</a>
+                <a href="blogs.html" class="btn-nav">Blogs</a>
+                <a href="contacto.html" class="btn-nav">Contacto</a>
+                <a href="registro.html" class="btn-nav signup">Registrarse</a>
+                <a href="login.html" class="btn-nav active">Iniciar Sesión</a>
+                <a href="carrito.html" class="btn-nav cart-widget" style="border: none; background: transparent; box-shadow: none;">
+                    🛒 Carrito (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content flex-center">
+        <section class="form-container">
+            <h2>INICIAR SESIÓN</h2>
+            <p class="form-subtitle">Ingresa con tu cuenta para acceder a tus beneficios y puntos LevelUp.</p>
+
+            <form id="form-login" novalidate>
+                <div class="form-group">
+                    <label for="login-correo">Correo Electrónico *</label>
+                    <input
+                        type="email"
+                        id="login-correo"
+                        name="correo"
+                        placeholder="nombre@inacap.cl, @inacapmail.cl o @gmail.com"
+                        maxlength="100"
+                    >
+                    <small class="error-message" id="error-login-correo"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Contraseña *</label>
+                    <input
+                        type="password"
+                        id="login-password"
+                        name="password"
+                        placeholder="Entre 4 y 10 caracteres"
+                        maxlength="10"
+                    >
+                    <small class="error-message" id="error-login-password"></small>
+                </div>
+
+                <button type="submit" class="btn-submit">INGRESAR</button>
+            </form>
+
+            <p class="form-subtitle" style="margin-top:20px;">
+                ¿Aún no tienes cuenta? <a href="registro.html" style="color: var(--azul-electrico);">Regístrate aquí</a>
+            </p>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
+    </footer>
+
+    <script src="../js/validaciones.js"></script>
+    <script src="../js/productos.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

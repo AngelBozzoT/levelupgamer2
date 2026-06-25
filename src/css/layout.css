@@ -1,0 +1,126 @@
+/* ==========================================================================
+   ESTRUCTURA DE LA BARRA DE NAVEGACIÓN SUPERIOR (MAIN HEADER)
+   ========================================================================== */
+.main-header {
+    background-color: rgba(5, 5, 15, 0.95);
+    border-bottom: 2px solid var(--azul-electrico);
+    position: sticky;
+    top: 0;
+    z-index: 3000;
+    backdrop-filter: blur(10px); /* Añade un sutil efecto translúcido cyberpunk */
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Contenedor del Logo (Protege el espacio del logo y su título contiguo) */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none; /* Elimina subrayado si es un enlace */
+    flex-shrink: 0;        /* Impide que el contenedor se achique */
+}
+
+/* Control estricto y escalable del Logotipo */
+.logo-img {
+    width: 60px;         /* Tamaño del logo visible y balanceado con el menú */
+    height: 60px;        /* Proporción idéntica para evitar deformación */
+    object-fit: contain; /* Ajusta la imagen sin estirarla */
+    flex-shrink: 0;      /* Garantiza que mantenga sus dimensiones exactas */
+}
+
+/* Título de la tienda al costado del Logo */
+.logo-text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--texto-blanco);
+    font-family: var(--fuente-titulos);
+    text-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+    white-space: nowrap; /* Evita saltos de línea que desalineen la barra */
+}
+
+/* Menú de Enlaces de Navegación Estructural (Escritorio) */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Widget del Carrito adaptado de manera fluida */
+.cart-widget {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--texto-blanco);
+    font-family: var(--fuente-titulos);
+    font-size: 0.9rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.cart-widget:hover {
+    color: var(--verde-neon);
+    text-shadow: 0 0 8px var(--verde-neon);
+}
+
+/* ==========================================================================
+   ÁREAS DE CONTENIDO PRINCIPAL (LAYOUT)
+   ========================================================================== */
+
+/* Contenedor Base de las Páginas */
+.main-content {
+    flex: 1;
+    padding: 40px 20px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Alineación Central Especial para los Formularios (Registro y Contacto) */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 160px); /* Ajustado dinámicamente según la altura del Navbar y Footer */
+}
+
+/* Sección de Encabezado de Vistas Secundarias */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h2 {
+    color: var(--azul-electrico);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: var(--texto-mutado);
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   PIE DE PÁGINA GLOBAL (FOOTER)
+   ========================================================================== */
+.main-footer {
+    background-color: #030307;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--texto-mutado);
+    border-top: 1px solid #151530;
+    margin-top: auto; /* Empuja el footer siempre hacia abajo en páginas con poco contenido */
+    width: 100%;
+    box-sizing: border-box;
+}

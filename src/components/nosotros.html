@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | Level-Up Gamer</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo-container">
+                <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
+                <span class="logo-text">LEVEL-UP GAMER</span>
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="nav-menu">
+                <a href="../../index.html" class="btn-nav">Home</a>
+                <a href="productos.html" class="btn-nav">Productos</a>
+                <a href="nosotros.html" class="btn-nav active">Nosotros</a>
+                <a href="blogs.html" class="btn-nav">Blogs</a>
+                <a href="contacto.html" class="btn-nav">Contacto</a>
+                <a href="registro.html" class="btn-nav signup">Registrarse</a>
+                <a href="login.html" class="btn-nav">Iniciar Sesión</a>
+                <a href="carrito.html" class="btn-nav cart-widget" style="border: none; background: transparent; box-shadow: none;">
+                    🛒 Carrito (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </div>
+    </header>
+
+<main class="nosotros-container">
+    <section class="nosotros-header">
+        <h1>SOBRE <span class="neon-green">NOSOTROS</span></h1>
+        <p class="subtitle">Nacimos con una sola misión: llevar el gaming en Chile al siguiente nivel. Somos gamers, para gamers.</p>
+    </section>
+
+    <section class="history-block">
+        <div class="history-text">
+            <h2>NUESTRA HISTORIA</h2>
+            <p>Level-Up Gamer comenzó en 2020 cuando un grupo de entusiastas de los e-sports en Santiago se dio cuenta de lo difícil que era conseguir hardware de primer nivel a precios justos en Chile.</p>
+            <p>Hoy, nos enorgullece ser la tienda de confianza para miles de jugadores, desde los que recién arman su primer setup hasta profesionales que compiten en ligas nacionales.</p>
+        </div>
+        <div class="history-image-wrapper">
+            <img src="../assets/imagenlevelup.png" alt="Level-Up Arena" class="history-img">
+        </div>
+    </section>
+
+    <section class="pillars-grid">
+        <div class="pillar-card border-blue">
+            <div class="pillar-icon icon-blue">🎯</div>
+            <h3>MISIÓN</h3>
+            <p>Proveer el mejor hardware y periféricos para potenciar las habilidades de cada jugador.</p>
+        </div>
+
+        <div class="pillar-card border-green">
+            <div class="pillar-icon icon-green">⚡</div>
+            <h3>VISIÓN</h3>
+            <p>Ser el ecosistema gamer más grande y respetado de Latinoamérica.</p>
+        </div>
+
+        <div class="pillar-card border-light-blue">
+            <div class="pillar-icon icon-light-blue">👥</div>
+            <h3>COMUNIDAD</h3>
+            <p>Fomentar un espacio donde los gamers puedan compartir, aprender y competir.</p>
+        </div>
+
+        <div class="pillar-card border-emerald">
+            <div class="pillar-icon icon-emerald">🛡️</div>
+            <h3>CALIDAD</h3>
+            <p>Solo trabajamos con marcas oficiales y ofrecemos garantía real en Chile.</p>
+        </div>
+    </section>
+</main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
+    </footer>
+
+    <script src="../js/productos.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
