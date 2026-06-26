@@ -88,7 +88,6 @@ function validarCorreoConDominio(correo, dominiosPermitidos) {
 
 /**
  * Valida el formato de un RUN chileno SIN puntos ni guion (Ej: 19011022K).
- * Largo total permitido: 7 a 9 caracteres (cuerpo numérico + dígito verificador).
  */
 function validarFormatoRUN(valor) {
     const limpio = valor.trim();
@@ -98,9 +97,6 @@ function validarFormatoRUN(valor) {
 
 /* ==========================================================================
    SECCIÓN B: Validaciones del Formulario de Inicio de Sesión (Login)
-   Reglas (Anexo 1):
-   - Correo: requerido, máx 100, solo @inacap.cl / @inacapmail.cl / @gmail.com
-   - Contraseña: requerido, entre 4 y 10 caracteres
    ========================================================================== */
 function validarFormularioLogin(e) {
     e.preventDefault();
@@ -117,8 +113,8 @@ function validarFormularioLogin(e) {
         } else if (correo.length > 100) {
             mostrarError("login-correo", "El correo no puede superar los 100 caracteres.");
             esValido = false;
-        } else if (!validarCorreoConDominio(correo, ["inacap.cl", "inacapmail.cl", "gmail.com"])) {
-            mostrarError("login-correo", "Solo se aceptan correos @inacap.cl, @inacapmail.cl o @gmail.com.");
+        } else if (!validarCorreoConDominio(correo, ["inacap.cl", "inacapmail.cl", "gmail.com", "duocuc.cl", "alumnos.duoc.cl"])) {
+            mostrarError("login-correo", "Solo se aceptan correos institucionales o gmail.");
             esValido = false;
         }
     }
@@ -136,25 +132,63 @@ function validarFormularioLogin(e) {
     }
 
     if (esValido) {
-        alert("¡Bienvenido de nuevo a Level-Up Gamer! Sesión iniciada correctamente.");
+        const correoIngresado = correoElement.value.trim().toLowerCase();
+        
+        // ==========================================================================
+        // 1. CONTROL DE ADMINISTRADOR (admin@inacap.cl)
+        // ==========================================================================
+        if (correoIngresado === "admin@inacap.cl") {
+            localStorage.removeItem("usuarioActivo"); // Limpiar residuos de usuarios comunes
+            localStorage.removeItem("logout_manual");
+            localStorage.setItem("isAdmin", "true");  // Bandera que main.js necesita para activar el menú e interactividad root
+            
+            alert("¡Inicio de sesión como Administrador correcto!");
+            document.getElementById("form-login").reset();
+            window.location.href = "../../index.html";
+            return; // Detiene la ejecución aquí para que no cree el datosUsuario común de abajo
+        }
+
+        // ==========================================================================
+        // 2. FLUJO PARA USUARIOS COMUNES / ALUMNOS
+        // ==========================================================================
+        // Evaluar si es de la comunidad Duoc para mantener activo su descuento
+        let esComunidadDuoc = false;
+        if (correoIngresado.endsWith("@duocuc.cl") || correoIngresado.endsWith("@alumnos.duoc.cl")) {
+            esComunidadDuoc = true;
+        }
+
+        // Crear la estructura de sesión activa en localStorage
+        const datosUsuario = {
+            run: "12345678K", // RUN simulado para inicio rápido
+            nombre: correoIngresado.split("@")[0], // Extrae el alias antes del @ como nombre visible
+            email: correoIngresado,
+            aplicaDescuentoEspecial: esComunidadDuoc,
+            puntosLevelUp: 150 // Puntos base otorgados por la plataforma
+        };
+
+        // Guardar el estado del usuario activo
+        localStorage.removeItem("isAdmin"); // Asegurar que no arrastre sesiones de admin antiguas
+        localStorage.setItem("usuarioActivo", JSON.stringify(datosUsuario));
+
+        alert(`¡Bienvenido de nuevo, ${datosUsuario.nombre}! Sesión iniciada correctamente.`);
         document.getElementById("form-login").reset();
+
+        // Redireccionar a la raíz
         window.location.href = "../../index.html";
     }
 }
 
 /* ==========================================================================
    SECCIÓN C: Validaciones del Formulario de Registro
-   (Equivalente a "Crear Usuario" del administrador, según Anexo 1)
    ========================================================================== */
 function validarFormularioRegistro(e) {
-    e.preventDefault(); // Detener el envío por defecto
+    e.preventDefault();
 
-    // Limpiar todos los errores previos usando los ID de error exactos
     limpiarErrores(["run", "nombre", "apellidos", "email", "password", "fecha", "region", "comuna", "direccion"]);
-
     let esValido = true;
+    let esComunidadDuoc = false;
 
-    // 1. Validar RUN (sin puntos ni guion)
+    // 1. Validar RUN
     const runElement = document.getElementById("run");
     if (runElement) {
         const run = runElement.value.trim();
@@ -193,23 +227,28 @@ function validarFormularioRegistro(e) {
         }
     }
 
-    // 4. Validar Correo Electrónico (dominio institucional o gmail)
+    // 4. Validar Correo Electrónico
     const emailElement = document.getElementById("email");
     if (emailElement) {
-        const email = emailElement.value.trim();
+        const email = emailElement.value.trim().toLowerCase();
         if (email === "") {
             mostrarError("email", "El correo electrónico es obligatorio.");
             esValido = false;
         } else if (email.length > 100) {
             mostrarError("email", "El correo no puede superar los 100 caracteres.");
             esValido = false;
-        } else if (!validarCorreoConDominio(email, ["inacap.cl", "profesor.inacap.cl", "gmail.com"])) {
-            mostrarError("email", "Solo se aceptan correos @inacap.cl, @profesor.inacap.cl o @gmail.com.");
+        } else if (!validarCorreoConDominio(email, ["inacap.cl", "profesor.inacap.cl", "gmail.com", "duocuc.cl", "alumnos.duoc.cl"])) {
+            mostrarError("email", "Correo no permitido. Dominios válidos: @inacap.cl, @duocuc.cl, @alumnos.duoc.cl o @gmail.com.");
             esValido = false;
+        } else {
+            // Evaluar si califica para el descuento del 20%
+            if (email.endsWith("@duocuc.cl") || email.endsWith("@alumnos.duoc.cl")) {
+                esComunidadDuoc = true;
+            }
         }
     }
 
-    // 5. Validar Contraseña (misma regla usada luego en el Login: 4 a 10 caracteres)
+    // 5. Validar Contraseña
     const passwordElement = document.getElementById("password");
     if (passwordElement) {
         const password = passwordElement.value;
@@ -222,7 +261,7 @@ function validarFormularioRegistro(e) {
         }
     }
 
-    // 6. Validar Fecha de Nacimiento (Control estricto de zona horaria local +18)
+    // 6. Validar Fecha de Nacimiento (Mayoría de edad +18)
     const fechaInput = document.getElementById("fecha-nacimiento");
     if (fechaInput) {
         const fechaNacimientoInput = fechaInput.value;
@@ -230,7 +269,6 @@ function validarFormularioRegistro(e) {
             mostrarError("fecha", "La fecha de nacimiento es obligatoria.");
             esValido = false;
         } else {
-            // Parsear la fecha manualmente para evitar desvíos horarios UTC
             const partes = fechaNacimientoInput.split('-');
             const anioNac = parseInt(partes[0], 10);
             const mesNac = parseInt(partes[1], 10) - 1;
@@ -254,7 +292,6 @@ function validarFormularioRegistro(e) {
     // 7. Validar Región y Comuna
     const regionElement = document.getElementById("region");
     const comunaElement = document.getElementById("comuna");
-
     if (regionElement && comunaElement) {
         const region = regionElement.value;
         const comuna = comunaElement.value;
@@ -282,9 +319,24 @@ function validarFormularioRegistro(e) {
         }
     }
 
-    // Si todo pasa con éxito
+    // Guardado y procesamiento al completar con éxito
     if (esValido) {
-        alert("¡Registro exitoso! Bienvenido a Level-Up Gamer. Ahora puedes iniciar sesión.");
+        const datosUsuario = {
+            run: runElement.value.trim(),
+            nombre: nombreElement.value.trim(),
+            email: emailElement.value.trim().toLowerCase(),
+            aplicaDescuentoEspecial: esComunidadDuoc,
+            puntosLevelUp: 0
+        };
+
+        localStorage.setItem("usuarioActivo", JSON.stringify(datosUsuario));
+
+        if (esComunidadDuoc) {
+            alert("¡Registro exitoso! Se ha detectado tu correo institucional de Duoc. Tu beneficio del 20% de descuento vitalicio ha sido configurado.");
+        } else {
+            alert("¡Registro exitoso! Bienvenido a Level-Up Gamer. Ahora puedes iniciar sesión.");
+        }
+
         document.getElementById("form-registro").reset();
         if (comunaElement) comunaElement.disabled = true;
         window.location.href = "login.html";
@@ -293,7 +345,6 @@ function validarFormularioRegistro(e) {
 
 /* ==========================================================================
    SECCIÓN D: Validaciones del Formulario de Contacto
-   Reglas (Anexo 1): correo solo @inacap.cl / @profesor.inacap.cl / @gmail.com
    ========================================================================== */
 function actualizarContadorCaracteres(e) {
     const longitud = e.target.value.length;
@@ -307,10 +358,8 @@ function validarFormularioContacto(e) {
     e.preventDefault();
 
     limpiarErrores(["contacto-nombre", "contacto-correo", "contacto-comentario"]);
-
     let esValido = true;
 
-    // 1. Validar Nombre Completo (Max 100 caracteres)
     const nombreElement = document.getElementById("contacto-nombre");
     if (nombreElement) {
         const nombre = nombreElement.value.trim();
@@ -323,23 +372,18 @@ function validarFormularioContacto(e) {
         }
     }
 
-    // 2. Validar Correo Electrónico (Max 100, dominio institucional o gmail)
     const correoElement = document.getElementById("contacto-correo");
     if (correoElement) {
         const correo = correoElement.value.trim();
         if (correo === "") {
             mostrarError("contacto-correo", "El correo electrónico es requerido.");
             esValido = false;
-        } else if (correo.length > 100) {
-            mostrarError("contacto-correo", "El correo no puede superar los 100 caracteres.");
-            esValido = false;
-        } else if (!validarCorreoConDominio(correo, ["inacap.cl", "profesor.inacap.cl", "gmail.com"])) {
-            mostrarError("contacto-correo", "Solo se aceptan correos @inacap.cl, @profesor.inacap.cl o @gmail.com.");
+        } else if (!validarCorreoConDominio(correo, ["inacap.cl", "profesor.inacap.cl", "gmail.com", "duocuc.cl", "alumnos.duoc.cl"])) {
+            mostrarError("contacto-correo", "Solo se aceptan correos válidos de la comunidad o gmail.");
             esValido = false;
         }
     }
 
-    // 3. Validar Comentario o Mensaje (Max 500 caracteres)
     const comentarioElement = document.getElementById("contacto-comentario");
     if (comentarioElement) {
         const comentario = comentarioElement.value.trim();
@@ -352,7 +396,6 @@ function validarFormularioContacto(e) {
         }
     }
 
-    // Si todo es correcto
     if (esValido) {
         alert("¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.");
         document.getElementById("form-contacto").reset();

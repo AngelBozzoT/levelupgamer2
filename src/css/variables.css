@@ -1,40 +1,31 @@
-/* Importación de Fuentes Oficiales de Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
-
 :root {
-    /* Paleta de Colores Corporativos */
-    --bg-principal: #000000;       /* Negro azulado muy oscuro */
-    --bg-tarjetas: #101026;        /* Fondo gris/azul cyberpunk para formularios y tarjetas */
-    --azul-electrico: #1E90FF;     /* Color de acento para enfoques y enlaces activos */
-    --verde-neon: #39FF14;         /* Color de éxito o detalles de iluminación */
-    --rojo-error: #ff3333;         /* Color neón para los mensajes de validación */
+    /* Paleta de Colores Gamer / Cyberpunk */
+    --azul-electrico: #00bfff;
+    --verde-neon: #10ff5a;
+    --rojo-error: #ff4a4a;
+    --bg-principal: #000000;
+    --bg-tarjetas: #000000;
+    --texto-blanco: #ffffff;
+    --texto-mutado: ##D3D3D3;
     
     /* Tipografías */
-    --fuente-titulos: 'Orbitron', sans-serif;
-    --fuente-cuerpo: 'Roboto', sans-serif;
-    
-    /* Colores de Texto */
-    --texto-blanco: #ffffff;
-    --texto-mutado: #b0b0d0;       /* Gris claro para subtítulos y placeholders */
+    --fuente-titulos: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tu fuente de títulos */
+    --fuente-cuerpo: 'Segoe UI', system-ui, sans-serif;
+
+    /* Reutilizables (Evita reescribir transiciones y sombras) */
+    --transicion-suave: all 0.3s ease;
+    --glow-azul: 0 0 12px var(--azul-electrico);
+    --glow-verde: 0 0 12px var(--verde-neon);
 }
 
-/* Reseteo Global Estándar */
+/* Reseteo básico global para consistencia entre páginas */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     background-color: var(--bg-principal);
     color: var(--texto-blanco);
     font-family: var(--fuente-cuerpo);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-h1, h2, h3, h4 {
-    font-family: var(--fuente-titulos);
-    letter-spacing: 1px;
 }

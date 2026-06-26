@@ -146,7 +146,6 @@ function actualizarContadorNav() {
 
 /**
  * Pequeña confirmación visual no intrusiva al añadir un producto.
- * Si no se desea, basta con no llamarla (el carrito seguirá funcionando igual).
  */
 function mostrarConfirmacionAgregado(nombreProducto) {
     const existente = document.getElementById("toast-carrito");
@@ -176,7 +175,7 @@ function mostrarConfirmacionAgregado(nombreProducto) {
 
 /**
  * Dibuja por completo la vista de la página carrito.html: listado de items,
- * subtotal, total y mensaje de carrito vacío.
+ * subtotal, descuento institucional, total y mensaje de carrito vacío.
  */
 function renderizarPaginaCarrito() {
     const contenedorListado = document.getElementById("cart-items-page-list");
@@ -184,6 +183,10 @@ function renderizarPaginaCarrito() {
     const txtCantidadTotal = document.getElementById("total-articulos");
     const txtSubtotal = document.getElementById("subtotal-precio");
     const txtTotal = document.getElementById("precio-total");
+    
+    // Elementos del Descuento Duoc
+    const rowDescuentoDuoc = document.getElementById("row-descuento-duoc");
+    const txtDescuentoDuocPrecio = document.getElementById("descuento-duoc-precio");
 
     if (!contenedorListado) return;
 
@@ -196,6 +199,7 @@ function renderizarPaginaCarrito() {
         if (txtCantidadTotal) txtCantidadTotal.textContent = "0";
         if (txtSubtotal) txtSubtotal.textContent = "$0";
         if (txtTotal) txtTotal.textContent = "$0";
+        if (rowDescuentoDuoc) rowDescuentoDuoc.style.display = "none";
         return;
     }
 
@@ -237,10 +241,26 @@ function renderizarPaginaCarrito() {
         contenedorListado.appendChild(fila);
     });
 
-    const totalGeneral = calcularPrecioTotal();
+    // --- CÁLCULO DE TOTALES Y EVALUACIÓN DEL DESCUENTO ---
+    const totalGeneralHardware = calcularPrecioTotal();
+    let descuentoDuoc = 0;
+    let totalFinalConDescuento = totalGeneralHardware;
+
+    // Verificar si hay un usuario logueado con beneficio de descuento Duoc
+    const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioActivo"));
+    if (usuarioLogueado && usuarioLogueado.aplicaDescuentoEspecial === true) {
+        descuentoDuoc = Math.round(totalGeneralHardware * 0.20); // 20% Descuento
+        totalFinalConDescuento = totalGeneralHardware - descuentoDuoc;
+
+        if (rowDescuentoDuoc) rowDescuentoDuoc.style.display = "flex";
+        if (txtDescuentoDuocPrecio) txtDescuentoDuocPrecio.textContent = `-${formatearPrecioCLP(descuentoDuoc)}`;
+    } else {
+        if (rowDescuentoDuoc) rowDescuentoDuoc.style.display = "none";
+    }
+
     if (txtCantidadTotal) txtCantidadTotal.textContent = cantidadAcumulada;
-    if (txtSubtotal) txtSubtotal.textContent = formatearPrecioCLP(totalGeneral);
-    if (txtTotal) txtTotal.textContent = formatearPrecioCLP(totalGeneral);
+    if (txtSubtotal) txtSubtotal.textContent = formatearPrecioCLP(totalGeneralHardware);
+    if (txtTotal) txtTotal.textContent = formatearPrecioCLP(totalFinalConDescuento);
 }
 
 /**

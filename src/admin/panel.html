@@ -20,8 +20,10 @@
         
         <aside class="admin-sidebar">
             <div class="sidebar-brand">
-                <img src="../assets/Logo.png" alt="Logo Level-Up" class="sidebar-logo" onerror="this.src='https://via.placeholder.com/50x50/101026/ffffff?text=Logo'">
-                <h3>Level-Up Admin</h3>
+                <a href="../../index.html" style="text-decoration: none; display: block;" title="Volver a la Tienda principal">
+                    <img src="../assets/Logo.png" alt="Logo Level-Up" class="sidebar-logo" onerror="this.src='https://via.placeholder.com/50x50/101026/ffffff?text=Logo'">
+                    <h3 style="color: #10ff5a;">Level-Up Admin</h3>
+                </a>
             </div>
             
             <nav class="admin-nav">
@@ -29,6 +31,12 @@
                     <li><a class="sidebar-link active" onclick="switchSection('dashboard', event)">Panel General</a></li>
                     <li><a class="sidebar-link" onclick="switchSection('productos', event)">Mantenedor Productos</a></li>
                     <li><a class="sidebar-link" onclick="switchSection('usuarios', event)">Mantenedor Usuarios</a></li>
+                    
+                    <li>
+                        <a href="../../index.html" class="sidebar-link" style="color: #00bfff; border-left: 3px dashed rgba(0, 191, 255, 0.5); padding-left: 10px; margin-top: 10px;">
+                         Volver a la Tienda
+                        </a>
+                    </li>
                 </ul>
                 
                 <a href="../../index.html" class="sidebar-link logout">Cerrar Sesión / Salir</a>
