@@ -12,7 +12,7 @@
         <div class="header-container">
             <a href="../../index.html" class="logo-container">
                 <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
-                <span class="logo-text">LEVEL-UP GAMER</span>
+                <span class="logo-text"></span>
             </a>
 
             <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
@@ -101,6 +101,11 @@
                     <input type="text" id="direccion" name="direccion" placeholder="Calle, número, departamento..." maxlength="300">
                     <small class="error-message" id="error-direccion"></small>
                 </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                <label for="codigo-referido" style="color: #fff; display: block; margin-bottom: 5px;">Código de Referido (Opcional)</label>
+                <input type="text" id="codigo-referido" placeholder="Ej: AMIGO-GAMER" style="background-color: #0b0b1a; color: #fff; border: 2px solid var(--azul-electrico); padding: 10px; width: 100%; border-radius: 6px; box-sizing: border-box;">
+                <small style="color: var(--texto-mutado); display: block; margin-top: 5px; font-size: 0.8rem;">¡Ingresa el código de un amigo para iniciar con 200 puntos extra!</small>
+                </div>
 
                 <button type="submit" class="btn-submit">REGISTRARSE</button>
             </form>
@@ -111,10 +116,9 @@
         </section>
     </main>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
-    </footer>
-
+    <!-- CONTENEDOR ÚNICO: JavaScript se encargará de renderizar la grilla simétrica aquí -->
+    <footer id="global-footer" class="main-footer"></footer>
+    
     <script src="../js/comunas.js"></script>
     <script src="../js/validaciones.js"></script>
     <script src="../js/productos.js"></script>

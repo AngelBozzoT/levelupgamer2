@@ -12,7 +12,7 @@
         <div class="header-container">
             <a href="../../index.html" class="logo-container">
                 <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
-                <span class="logo-text">LEVEL-UP GAMER</span>
+                <span class="logo-text"></span>
             </a>
 
             <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
@@ -39,65 +39,67 @@
     </header>
 
     <main class="blog-container">
-    <section class="blog-header">
-        <h1>LEVEL-UP <span class="neon-green">BLOG</span></h1>
-        <p class="subtitle">Noticias, guías de armado, reviews de hardware y todo lo que necesitas saber para mantener tu setup en la cima.</p>
-    </section>
+        <section class="blog-header">
+            <h1>LEVEL-UP <span class="neon-green">BLOG</span></h1>
+            <p class="subtitle">Noticias, guías de armado, reviews de hardware y todo lo que necesitas saber para mantener tu setup en la cima.</p>
+        </section>
 
-    <section class="blog-grid">
-        
-        <article class="blog-card border-blue">
-            <div class="blog-img-wrapper">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY6ZInbdrVRRmOM7XiIkONaCNHAXzTkNjMnh1KjQ7_MtxOwrfSg5R8yJk&s=10">
-            </div>
-            <div class="blog-card-content">
-                <span class="blog-category text-blue">GUÍAS DE ARMADO</span>
-                <h3>CÓMO ARMAR TU PC GAMER IDEAL EN CHILE</h3>
-                <p>Componentes, presupuesto y consejos clave para construir el PC gaming perfecto adaptado a tus necesidades y al mercado local.</p>
-                <div class="blog-card-footer">
-                    <span class="blog-date">14 JUL 2026</span>
-                    <a href="blog-detalle-armado-pc.html" class="blog-link link-blue">LEER ARTÍCULO →</a>
+        <section class="blog-grid">
+            
+            <!-- TARJETA 1: ARMADO PC -->
+            <article class="blog-card border-blue" onclick="window.location.href='blog-detalle-armado-pc.html'" style="cursor: pointer;">
+                <div class="blog-img-wrapper">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY6ZInbdrVRRmOM7XiIkONaCNHAXzTkNjMnh1KjQ7_MtxOwrfSg5R8yJk&s=10">
                 </div>
-            </div>
-        </article>
-
-        <article class="blog-card border-green">
-            <div class="blog-img-wrapper">
-                <img src="https://acf.geeknetic.es/imgw/imagenes/auto/2026/1/8/z5v-image.jpg?f=webp">
-            </div>
-            <div class="blog-card-content">
-                <span class="blog-category text-green">NOTICIAS</span>
-                <h3>LOS MEJORES LANZAMIENTOS DE HARDWARE</h3>
-                <p>Repasamos los lanzamientos más esperados del año, nuevas arquitecturas de tarjetas gráficas y qué periféricos valen la pena para tu setup gamer.</p>
-                <div class="blog-card-footer">
-                    <span class="blog-date">31 MAY 2026</span>
-                    <a href="blog-detalle-lanzamientos-hardware.html" class="blog-link link-green">LEER ARTÍCULO →</a>
+                <div class="blog-card-content">
+                    <span class="blog-category text-blue">GUÍAS DE ARMADO</span>
+                    <h3>CÓMO ARMAR TU PC GAMER IDEAL EN CHILE</h3>
+                    <p>Componentes, presupuesto y consejos clave para construir el PC gaming perfecto adaptado a tus necesidades y al mercado local.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-date">14 JUL 2026</span>
+                        <a href="blog-detalle-armado-pc.html" class="blog-link link-blue">LEER ARTÍCULO →</a>
+                    </div>
                 </div>
-            </div>
-        </article>
+            </article>
 
-        <article class="blog-card border-purple">
-            <div class="blog-img-wrapper">
-                <img src="https://cdnx.jumpseller.com/fullredes/image/63451853/cv0n7vh0_8949fefc_thumbnail_4096.jpg?1747253773">
-            </div>
-            <div class="blog-card-content">
-                <span class="blog-category text-purple">HARDWARE</span>
-                <h3>GUÍA COMPLETA: OPTIMIZACIÓN DE MEMORIA RAM</h3>
-                <p>¿Dual Channel? ¿Frecuencias estables? Te enseñamos cómo configurar correctamente tus módulos RAM en la BIOS para exprimir cada FPS en tus videojuegos.</p>
-                <div class="blog-card-footer">
-                    <span class="blog-date">18 ABR 2026</span>
-                    <a href="blog-detalle-ram.html" class="blog-link link-purple">LEER ARTÍCULO →</a>
+            <!-- TARJETA 2: LANZAMIENTOS -->
+            <article class="blog-card border-green" onclick="window.location.href='blog-detalle-lanzamientos-hardware.html'" style="cursor: pointer;">
+                <div class="blog-img-wrapper">
+                    <img src="https://acf.geeknetic.es/imgw/imagenes/auto/2026/1/8/z5v-image.jpg?f=webp">
                 </div>
-            </div>
-        </article>
+                <div class="blog-card-content">
+                    <span class="blog-category text-green">NOTICIAS</span>
+                    <h3>LOS MEJORES LANZAMIENTOS DE HARDWARE</h3>
+                    <p>Repasamos los lanzamientos más esperados del año, nuevas arquitecturas de tarjetas gráficas y qué periféricos valen la pena para tu setup gamer.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-date">31 MAY 2026</span>
+                        <a href="blog-detalle-lanzamientos-hardware.html" class="blog-link link-green">LEER ARTÍCULO →</a>
+                    </div>
+                </div>
+            </article>
 
-    </section>
-</main>
+            <!-- TARJETA 3: OPTIMIZACIÓN RAM -->
+            <article class="blog-card border-purple" onclick="window.location.href='blog-detalle-ram.html'" style="cursor: pointer;">
+                <div class="blog-img-wrapper">
+                    <img src="https://cdnx.jumpseller.com/fullredes/image/63451853/cv0n7vh0_8949fefc_thumbnail_4096.jpg?1747253773">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category text-purple">HARDWARE</span>
+                    <h3>GUÍA COMPLETA: OPTIMIZACIÓN DE MEMORIA RAM</h3>
+                    <p>¿Dual Channel? ¿Frecuencias estables? Te enseñamos cómo configurar correctamente tus módulos RAM en la BIOS para exprimir cada FPS en tus videojuegos.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-date">18 ABR 2026</span>
+                        <a href="blog-detalle-ram.html" class="blog-link link-purple">LEER ARTÍCULO →</a>
+                    </div>
+                </div>
+            </article>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
-    </footer>
+        </section>
+    </main>
 
+    <!-- CONTENEDOR ÚNICO: JavaScript se encargará de renderizar la grilla simétrica aquí -->
+    <footer id="global-footer" class="main-footer"></footer>
+    
     <script src="../js/productos.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/main.js"></script>

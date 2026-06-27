@@ -360,3 +360,133 @@
     margin-top: 5px;
     font-weight: 500;
 }
+/* ==========================================================================
+   OPTIMIZACIÓN MÓVIL PARA EL PANEL ADMINISTRATIVO (Media Queries)
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+    
+    /* 1. Cambiamos el contenedor principal de filas a columnas */
+    .admin-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+
+    /* 2. Transformamos la barra lateral en una barra superior horizontal */
+    .admin-sidebar {
+        width: 100% !important;
+        height: auto !important;
+        border-right: none !important;
+        border-bottom: 2px solid #1e90ff;
+        padding: 15px !important;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #000000;
+    }
+
+    /* 3. Reacomodamos el área del logo y título */
+    .sidebar-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 15px !important;
+    }
+
+    .sidebar-brand img {
+        max-width: 40px !important; /* Más pequeño en celular */
+        margin: 0 !important;
+    }
+
+    .sidebar-brand h3 {
+        font-size: 1.2rem !important;
+        margin: 0 !important;
+    }
+
+    /* 4. El menú de navegación ahora se despliega de forma horizontal y con scroll si no cabe */
+    .admin-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        flex-direction: row; /* Elementos uno al lado del otro */
+        overflow-x: auto;    /* Si son muchos, permite deslizar con el dedo */
+        white-space: nowrap;
+        padding-bottom: 8px;
+        gap: 8px;
+        list-style: none;
+        margin: 0;
+    }
+
+    .sidebar-menu li {
+        flex: 0 0 auto;
+    }
+
+    /* Ajustamos los botones del menú para que parezcan pestañas touch */
+    .sidebar-link {
+        padding: 8px 12px !important;
+        font-size: 0.85rem !important;
+        border-radius: 4px;
+        border: 1px solid rgba(30, 144, 255, 0.3);
+    }
+
+    /* Separamos visualmente el botón de "Volver a la Tienda" */
+    .sidebar-menu li:last-child .sidebar-link {
+        margin-top: 0 !important;
+        border-left: none !important;
+        border: 1px dashed #00bfff !important;
+    }
+
+    /* 5. El botón de cerrar sesión se vuelve un botón superior o compacto */
+    .admin-sidebar .logout {
+        text-align: center;
+        margin-top: 5px !important;
+        padding: 8px !important;
+        background: rgba(255, 51, 51, 0.1);
+        border: 1px solid #ff3333;
+        border-radius: 4px;
+    }
+
+    /* 6. Ajustamos el contenedor de las secciones para que no se vea cortado */
+    .admin-content {
+        padding: 15px !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* 7. Las tarjetas informativas del Panel General pasan de 3 columnas a 1 sola */
+    .dashboard-cards-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px !important;
+    }
+
+    .stat-card {
+        padding: 20px !important;
+    }
+
+    /* 8. Optimización para las Tablas de los Mantenedores (Evita que rompan el ancho) */
+    .table-container {
+        width: 100%;
+        overflow-x: auto; /* Agrega scroll horizontal a la tabla para que no deforme la pantalla */
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid #333;
+        margin-top: 15px;
+    }
+
+    .crud-table {
+        min-width: 600px; /* Fuerza a la tabla a mantener estructura legible bajo el scroll */
+    }
+
+    /* 9. Formularios en una sola columna para rellenar fácil desde el teclado móvil */
+    .form-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px !important;
+    }
+}

@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo | Level-Up Gamer</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/variables.css">   <!-- Para mantener tus colores e identidades de marca -->
+    <link rel="stylesheet" href="../css/admin.css">       <!-- Único dueño del diseño del panel -->
     <script>
         // Bloqueo de Seguridad: Si no es admin, es devuelto al login inmediatamente
         if (localStorage.getItem("isAdmin") !== "true") {
             alert("Acceso denegado. Por favor, inicie sesión como administrador.");
+            // Corregido para que apunte consistentemente a la carpeta de componentes
             window.location.href = "../components/login.html"; 
         }
     </script>
@@ -257,18 +258,20 @@
     <script src="../js/validaciones_admin.js"></script>
     
     <script>
+        // SOLUCIÓN: Agregado el parámetro 'event' para capturar la interacción
         function switchSection(sectionId, event) {
             document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active-section'));
             document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
             
             document.getElementById('sec-' + sectionId).classList.add('active-section');
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
             
             closeForm('producto');
             closeForm('usuario');
         }
 
-        // Estado global: guarda si el formulario actual está en modo edición y sobre qué registro
         window.adminEditState = null;
 
         function openForm(type, mode, id = null) {
@@ -304,7 +307,6 @@
             window.adminEditState = null;
         }
 
-        // Evento operativo para cerrar sesión interceptando los enlaces correctos
         document.addEventListener("DOMContentLoaded", function() {
             const enlaces = document.querySelectorAll("a, button");
             enlaces.forEach(el => {

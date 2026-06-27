@@ -1,12 +1,12 @@
 :root {
     /* Paleta de Colores Gamer / Cyberpunk */
-    --azul-electrico: #00bfff;
-    --verde-neon: #10ff5a;
+    --azul-electrico: #1E90FF;
+    --verde-neon: #39FF14;
     --rojo-error: #ff4a4a;
     --bg-principal: #000000;
     --bg-tarjetas: #000000;
     --texto-blanco: #ffffff;
-    --texto-mutado: ##D3D3D3;
+    --texto-mutado: #D3D3D3;
     
     /* Tipografías */
     --fuente-titulos: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tu fuente de títulos */

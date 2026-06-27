@@ -15,7 +15,7 @@
         <div class="header-container">
             <a href="../../index.html" class="logo-container">
                 <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
-                <span class="logo-text">LEVEL-UP GAMER</span>
+                <span class="logo-text"></span>
             </a>
 
             <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
@@ -76,19 +76,22 @@
                         <strong>Total</strong>
                         <strong id="precio-total" class="neon-price">$0</strong>
                     </div>
-                    <button class="btn-checkout" onclick="finalizarPedido()">IR A PAGAR →</button>
+                    <!-- Busca tu botón actual de IR A PAGAR y añade el atributo onclick -->
+                    <button onclick="procesarCheckoutPlataforma()" class="btn-checkout" style="width: 100%; background: #0099ff; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                        IR A PAGAR →
+                    </button>
                     <a href="productos.html" class="link-back">Continuar comprando</a>
                 </div>
             </aside>
         </div>
     </main>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
-    </footer>
-
+    <!-- CONTENEDOR ÚNICO: JavaScript se encargará de renderizar la grilla simétrica aquí -->
+    <footer id="global-footer" class="main-footer"></footer>
+    
     <script src="../js/productos.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/main.js"></script>
+    <!-- Botón Flotante de Soporte Técnico vía WhatsApp en Contacto -->
 </body>
 </html>

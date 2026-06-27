@@ -39,7 +39,7 @@
     </header>
 
     <main class="blog-article-container">
-        <a href="blogs.html" class="blog-article-back">&larr; Volver al blog</a>
+        <a href="blogs.html" class="link-back" style="display:inline-block; margin-bottom:20px; color: #ffffff; text-decoration: none; font-weight: bold;">&larr; Volver al blog</a>
 
         <div class="blog-article-hero">
             <img src="https://todoclick.cl/modules/smartblog/images/3-large_default.jpg" alt="Armado de PC Gamer">
@@ -70,11 +70,96 @@
 
             <p>En Level-Up Gamer encontrarás todos los componentes y periféricos que necesitas para construir el setup de tus sueños, con garantía oficial y asesoría especializada para gamers chilenos.</p>
         </div>
+        <!-- SECCIÓN DE RESEÑAS / REVIEWS -->
+        <section class="reviews-section">
+            <h2 class="reviews-title">RESEÑAS DE LA COMUNIDAD</h2>
+            
+            <div class="reviews-grid">
+                <!-- Reseña 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-user">
+                            <span class="review-avatar">👤</span>
+                            <div>
+                                <h4 class="review-name">Ignacio_RazaGamer</h4>
+                                <span class="review-date">Hace 2 días</span>
+                            </div>
+                        </div>
+                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="review-text">Excelente guía. Seguí los pasos para armar mi PC con un Ryzen 5 y una RTX 4060 en Santiago y todo anduvo a la primera. El flujo de aire en el gabinete es clave.</p>
+                </div>
+
+                <!-- Reseña 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-user">
+                            <span class="review-avatar">👤</span>
+                            <div>
+                                <h4 class="review-name">Dani_Ultra</h4>
+                                <span class="review-date">Hace 1 semana</span>
+                            </div>
+                        </div>
+                        <div class="review-rating">⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="review-text">Muy detallado el artículo. Me sirvió mucho la aclaración sobre no escatimar en gastos con la fuente de poder, un error que casi cometo en mi presupuesto actual.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Reseña 3 (Nueva) -->
+        <div class="review-card">
+            <div class="review-header">
+                <div class="review-user">
+                    <span class="review-avatar">👤</span>
+                    <div>
+                        <h4 class="review-name">Patricio_Bozzo</h4>
+                        <span class="review-date">Hace 1 día</span>
+                    </div>
+                </div>
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+            </div>
+            <p class="review-text">Armé mi setup de ciberseguridad siguiendo los consejos de compatibilidad de placas de esta guía y quedó impecable. 100% recomendado para evitar errores de novato.</p>
+        </div>
+        <section class="reviews-section">
+    <h2 class="reviews-title">RESEÑAS DE LA COMUNIDAD</h2>
+    
+    <!-- FORMULARIO PARA CREAR RESEÑA -->
+    <div class="review-form-container" style="background: #07070c; padding: 25px; border-radius: 10px; margin-bottom: 40px; border: 1px solid rgba(0, 132, 255, 0.15);">
+        <h3 style="color: #ffffff; margin-top: 0; margin-bottom: 15px; font-size: 1.2rem;">Deja tu Opinión</h3>
+        <form id="form-nueva-reseña" onsubmit="guardarReseña(event)">
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; color: #aaa; margin-bottom: 5px; font-size: 0.9rem;">Tu Nombre Gamer:</label>
+                <input type="text" id="review-username" required style="width: 100%; padding: 10px; background: #13131a; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; color: #ffffff; margin-bottom: 5px; font-size: 0.9rem;">Puntuación:</label>
+                <select id="review-stars" style="width: 100%; padding: 10px; background: #13131a; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                    <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ (Excelente)</option>
+                    <option value="⭐⭐⭐⭐">⭐⭐⭐⭐ (Muy Bueno)</option>
+                    <option value="⭐⭐⭐">⭐⭐⭐ (Bueno)</option>
+                    <option value="⭐⭐">⭐⭐ (Regular)</option>
+                    <option value="⭐">⭐ (Malo)</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; color: #aaa; margin-bottom: 5px; font-size: 0.9rem;">Tu Comentario:</label>
+                <textarea id="review-comment" rows="3" required style="width: 100%; padding: 10px; background: #13131a; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box; resize: vertical;"></textarea>
+            </div>
+
+            <button type="submit" style="background: #0084ff; color: white; border: none; padding: 10px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: background 0.2s;">Publicar Reseña</button>
+        </form>
+    </div>
+
+
+        </section>
+
     </main>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
-    </footer>
+    <!-- CONTENEDOR ÚNICO: JavaScript se encargará de renderizar la grilla simétrica aquí -->
+    <footer id="global-footer" class="main-footer"></footer>
+    
 
     <script src="../js/productos.js"></script>
     <script src="../js/cart.js"></script>

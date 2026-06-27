@@ -266,6 +266,9 @@ function renderizarPaginaCarrito() {
 /**
  * Simula el proceso de "pago" final y vacía el carrito.
  */
+/**
+ * Simula el proceso de "pago" final y vacía el carrito usando la clave correcta.
+ */
 function finalizarPedido() {
     if (obtenerCarrito().length === 0) {
         alert("Tu carrito está vacío. Añade productos antes de continuar.");
@@ -283,3 +286,52 @@ document.addEventListener("DOMContentLoaded", () => {
         renderizarPaginaCarrito();
     }
 });
+
+// Función para procesar el pago sincronizada con tu CART_STORAGE_KEY oficial
+function procesarCheckoutPlataforma() {
+    // CORRECCIÓN: Buscamos usando tu constante real CART_STORAGE_KEY
+    const carritoActual = obtenerCarrito();
+    
+    const totalArticulosTexto = document.getElementById("total-articulos")?.textContent || "0";
+    const cantidadEnContenedor = parseInt(totalArticulosTexto) || 0;
+
+    if (carritoActual.length === 0 && cantidadEnContenedor === 0) {
+        alert("⚠️ Tu inventario está vacío. Añade productos antes de proceder al pago.");
+        return;
+    }
+
+    let usuarioActivo = null;
+    try {
+        const datosUser = localStorage.getItem("usuarioActivo");
+        if (datosUser) usuarioActivo = JSON.parse(datosUser);
+    } catch (e) {
+        console.error("Error al recuperar usuario en checkout:", e);
+    }
+
+    const confirmarPago = confirm("🎮 ¿Confirmas que deseas proceder con el pago y la facturación de tu pedido?");
+    
+    if (confirmarPago) {
+        if (usuarioActivo && usuarioActivo.nombre) {
+            const correo = (usuarioActivo.correo || usuarioActivo.email || "").toLowerCase();
+            if (correo.includes("duoc")) {
+                alert(`¡Compra Exitosa, ${usuarioActivo.nombre.toUpperCase()}!\n\nSe ha aplicado correctamente tu 20% de Descuento Duoc de por vida.\nTu boleta y el código de seguimiento han sido enviados a: ${correo}`);
+            } else if (correo.includes("inacap")) {
+                alert(`¡Compra Exitosa, ${usuarioActivo.nombre.toUpperCase()}!\n\nSe ha aplicado correctamente tu 12% de Descuento Inacap.\nTu boleta y el código de seguimiento han sido enviados a: ${correo}`);
+            } else {
+                alert(`¡Compra Exitosa, ${usuarioActivo.nombre.toUpperCase()}!\n\nTu pedido ha sido procesado con éxito. Gracias por confiar en Level-Up Gamer.`);
+            }
+        } else {
+            alert("¡Compra Exitosa!\n\nTu pedido ha sido procesado con éxito. ¡Gracias por tu compra en Level-Up Gamer!");
+        }
+
+        // CORRECCIÓN CLAVE: Vaciamos usando tu función nativa que limpia 'levelup_carrito' y actualiza el Nav
+        vaciarCarrito();
+        
+        // Redirección limpia
+        if (window.location.pathname.includes("/components/")) {
+            window.location.href = "../../index.html";
+        } else {
+            window.location.href = "index.html";
+        }
+    }
+}

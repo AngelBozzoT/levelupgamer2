@@ -12,7 +12,7 @@
         <div class="header-container">
             <a href="../../index.html" class="logo-container">
                 <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
-                <span class="logo-text">LEVEL-UP GAMER</span>
+                <span class="logo-text"></span>
             </a>
 
             <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
@@ -39,7 +39,7 @@
     </header>
 
     <main class="blog-article-container">
-        <a href="blogs.html" class="blog-article-back">&larr; Volver al blog</a>
+        <a href="blogs.html" class="link-back" style="display:inline-block; margin-bottom:20px; color: #ffffff; text-decoration: none; font-weight: bold;">&larr; Volver al blog</a>
 
         <div class="blog-article-hero">
             <img src="https://cdnx.jumpseller.com/fullredes/image/63451853/cv0n7vh0_8949fefc_thumbnail_4096.jpg?1747253773" alt="Optimización de memoria RAM">
@@ -70,11 +70,47 @@
 
             <p>En Level-Up Gamer contamos con asesoría técnica especializada para ayudarte a elegir la configuración de memoria ideal para tu setup.</p>
         </div>
+        <section class="reviews-section">
+    <h2 class="reviews-title">RESEÑAS DE LA COMUNIDAD</h2>
+    
+    <!-- FORMULARIO PARA CREAR RESEÑA -->
+    <div class="review-form-container" style="background: #07070c; padding: 25px; border-radius: 10px; margin-bottom: 40px; border: 1px solid rgba(0, 132, 255, 0.15);">
+        <h3 style="color: #fff; margin-top: 0; margin-bottom: 15px; font-size: 1.2rem;">Deja tu Opinión</h3>
+        <form id="form-nueva-reseña" onsubmit="guardarReseña(event)">
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; color: #aaa; margin-bottom: 5px; font-size: 0.9rem;">Tu Nombre Gamer:</label>
+                <input type="text" id="review-username" required style="width: 100%; padding: 10px; background: #13131a; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; color: #aaa; margin-bottom: 5px; font-size: 0.9rem;">Puntuación:</label>
+                <select id="review-stars" style="width: 100%; padding: 10px; background: #13131a; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                    <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ (Excelente)</option>
+                    <option value="⭐⭐⭐⭐">⭐⭐⭐⭐ (Muy Bueno)</option>
+                    <option value="⭐⭐⭐">⭐⭐⭐ (Bueno)</option>
+                    <option value="⭐⭐">⭐⭐ (Regular)</option>
+                    <option value="⭐">⭐ (Malo)</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; color: #aaa; margin-bottom: 5px; font-size: 0.9rem;">Tu Comentario:</label>
+                <textarea id="review-comment" rows="3" required style="width: 100%; padding: 10px; background: #13131a; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box; resize: vertical;"></textarea>
+            </div>
+
+            <button type="submit" style="background: #0084ff; color: white; border: none; padding: 10px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: background 0.2s;">Publicar Reseña</button>
+        </form>
+    </div>
+
+
+            
+    </div>
+</section>
     </main>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
-    </footer>
+    <!-- CONTENEDOR ÚNICO: JavaScript se encargará de renderizar la grilla simétrica aquí -->
+    <footer id="global-footer" class="main-footer"></footer>
+    
 
     <script src="../js/productos.js"></script>
     <script src="../js/cart.js"></script>

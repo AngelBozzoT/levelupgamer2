@@ -2,36 +2,38 @@
    Control de Formularios y Validaciones - Level-Up Gamer
    (Vista Tienda: Login, Registro, Contacto)
    ========================================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
-    // --- 1. Inicialización de Ubicaciones Dinámicas (Registro) ---
+    
+    // ==========================================================================
+    // INICIALIZACIÓN DE UBICACIONES (Chile)
+    // ==========================================================================
     const selectRegion = document.getElementById("region");
     const selectComuna = document.getElementById("comuna");
-
+    
     if (selectRegion && selectComuna) {
         inicializarUbicaciones(selectRegion, selectComuna);
     }
 
-    // --- 2. Inicialización de Formularios ---
-    const formLogin = document.getElementById("form-login");
-    const formRegistro = document.getElementById("form-registro");
-    const formContacto = document.getElementById("form-contacto");
-
-    if (formLogin) {
-        formLogin.addEventListener("submit", validarFormularioLogin);
+    // ==========================================================================
+    // VINCULACIÓN DE FORMULARIOS A SUS VALIDACIONES REALES
+    // ==========================================================================
+    const loginForm = document.getElementById("form-login");
+    if (loginForm) {
+        loginForm.addEventListener("submit", validarFormularioLogin);
     }
 
-    if (formRegistro) {
-        formRegistro.addEventListener("submit", validarFormularioRegistro);
+    const registroForm = document.getElementById("form-registro"); 
+    if (registroForm) {
+        registroForm.addEventListener("submit", validarFormularioRegistro);
     }
 
-    if (formContacto) {
-        // Inicializar contador de caracteres en tiempo real
-        const txtComentario = document.getElementById("contacto-comentario");
-        if (txtComentario) {
-            txtComentario.addEventListener("input", actualizarContadorCaracteres);
+    const contactoForm = document.getElementById("form-contacto");
+    if (contactoForm) {
+        contactoForm.addEventListener("submit", validarFormularioContacto);
+        const comentarioArea = document.getElementById("mensaje");
+        if (comentarioArea) {
+            comentarioArea.addEventListener("input", actualizarContadorCaracteres);
         }
-        formContacto.addEventListener("submit", validarFormularioContacto);
     }
 });
 
@@ -42,6 +44,8 @@ function inicializarUbicaciones(selectRegion, selectComuna) {
     const datosRegiones = window.regionesData;
     if (!datosRegiones) return;
 
+    // Limpiamos e insertamos la opción por defecto por si acaso
+    selectRegion.innerHTML = '<option value="">Seleccione una región</option>';
     datosRegiones.forEach(region => {
         const option = document.createElement("option");
         option.value = region.id;
@@ -73,11 +77,6 @@ function inicializarUbicaciones(selectRegion, selectComuna) {
 /* ==========================================================================
    SECCIÓN AUX: Validadores reutilizables (correo institucional / RUN)
    ========================================================================== */
-
-/**
- * Valida que un correo tenga formato válido Y que su dominio esté dentro
- * de la lista de dominios permitidos para ese formulario en particular.
- */
 function validarCorreoConDominio(correo, dominiosPermitidos) {
     const regexFormato = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!regexFormato.test(correo)) return false;
@@ -86,10 +85,7 @@ function validarCorreoConDominio(correo, dominiosPermitidos) {
     return dominiosPermitidos.some(permitido => dominio === permitido.toLowerCase());
 }
 
-/**
- * Valida el formato de un RUN chileno SIN puntos ni guion (Ej: 19011022K).
- */
-function validarFormatoRUN(valor) {
+function validarFormFormatRUN(valor) {
     const limpio = valor.trim();
     if (!/^[0-9]+[0-9kK]$/.test(limpio)) return false;
     return limpio.length >= 7 && limpio.length <= 9;
@@ -100,7 +96,6 @@ function validarFormatoRUN(valor) {
    ========================================================================== */
 function validarFormularioLogin(e) {
     e.preventDefault();
-
     limpiarErrores(["login-correo", "login-password"]);
     let esValido = true;
 
@@ -113,7 +108,8 @@ function validarFormularioLogin(e) {
         } else if (correo.length > 100) {
             mostrarError("login-correo", "El correo no puede superar los 100 caracteres.");
             esValido = false;
-        } else if (!validarCorreoConDominio(correo, ["inacap.cl", "inacapmail.cl", "gmail.com", "duocuc.cl", "alumnos.duoc.cl"])) {
+        } 
+        else if (!validarCorreoConDominio(correo, ["inacap.cl", "inacapmail.cl", "gmail.com", "duoc.cl", "duocuc.cl", "alumnos.duoc.cl"])) {
             mostrarError("login-correo", "Solo se aceptan correos institucionales o gmail.");
             esValido = false;
         }
@@ -134,57 +130,48 @@ function validarFormularioLogin(e) {
     if (esValido) {
         const correoIngresado = correoElement.value.trim().toLowerCase();
         
-        // ==========================================================================
-        // 1. CONTROL DE ADMINISTRADOR (admin@inacap.cl)
-        // ==========================================================================
         if (correoIngresado === "admin@inacap.cl") {
-            localStorage.removeItem("usuarioActivo"); // Limpiar residuos de usuarios comunes
+            localStorage.removeItem("usuarioActivo");
             localStorage.removeItem("logout_manual");
-            localStorage.setItem("isAdmin", "true");  // Bandera que main.js necesita para activar el menú e interactividad root
+            localStorage.setItem("isAdmin", "true");
             
             alert("¡Inicio de sesión como Administrador correcto!");
             document.getElementById("form-login").reset();
             window.location.href = "../../index.html";
-            return; // Detiene la ejecución aquí para que no cree el datosUsuario común de abajo
+            return;
         }
 
-        // ==========================================================================
-        // 2. FLUJO PARA USUARIOS COMUNES / ALUMNOS
-        // ==========================================================================
-        // Evaluar si es de la comunidad Duoc para mantener activo su descuento
         let esComunidadDuoc = false;
-        if (correoIngresado.endsWith("@duocuc.cl") || correoIngresado.endsWith("@alumnos.duoc.cl")) {
+        if (correoIngresado.endsWith("@duoc.cl") || correoIngresado.endsWith("@duocuc.cl") || correoIngresado.endsWith("@alumnos.duoc.cl")) {
             esComunidadDuoc = true;
         }
 
-        // Crear la estructura de sesión activa en localStorage
+        // INTEGRACIÓN GAMIFICACIÓN: Carga con perfil y puntos iniciales por defecto
         const datosUsuario = {
-            run: "12345678K", // RUN simulado para inicio rápido
-            nombre: correoIngresado.split("@")[0], // Extrae el alias antes del @ como nombre visible
+            run: "12345678K",
+            nombre: correoIngresado.split("@")[0].toUpperCase(), 
             email: correoIngresado,
             aplicaDescuentoEspecial: esComunidadDuoc,
-            puntosLevelUp: 150 // Puntos base otorgados por la plataforma
+            puntosLevelUp: 150,
+            nivelGamer: "Nivel 1 (Noob)"
         };
 
-        // Guardar el estado del usuario activo
-        localStorage.removeItem("isAdmin"); // Asegurar que no arrastre sesiones de admin antiguas
+        localStorage.removeItem("isAdmin");
         localStorage.setItem("usuarioActivo", JSON.stringify(datosUsuario));
 
-        alert(`¡Bienvenido de nuevo, ${datosUsuario.nombre}! Sesión iniciada correctamente.`);
+        alert(`¡Bienvenido de nuevo, ${datosUsuario.nombre}! Sesión iniciada correctamente.\nNivel: ${datosUsuario.nivelGamer} | Inventario: ${datosUsuario.puntosLevelUp} Pts.`);
         document.getElementById("form-login").reset();
-
-        // Redireccionar a la raíz
         window.location.href = "../../index.html";
     }
 }
 
 /* ==========================================================================
-   SECCIÓN C: Validaciones del Formulario de Registro
+   SECCIÓN C: Validaciones del Formulario de Registro (CON GAMIFICACIÓN)
    ========================================================================== */
 function validarFormularioRegistro(e) {
     e.preventDefault();
 
-    limpiarErrores(["run", "nombre", "apellidos", "email", "password", "fecha", "region", "comuna", "direccion"]);
+    limpiarErrores(["run", "nombre", "apellidos", "reg-email", "password", "fecha", "region", "comuna", "direccion"]);
     let esValido = true;
     let esComunidadDuoc = false;
 
@@ -195,7 +182,7 @@ function validarFormularioRegistro(e) {
         if (run === "") {
             mostrarError("run", "El RUN es obligatorio.");
             esValido = false;
-        } else if (!validarFormatoRUN(run)) {
+        } else if (!validarFormFormatRUN(run)) {
             mostrarError("run", "Formato inválido. Sin puntos ni guion (Ej: 19011022K).");
             esValido = false;
         }
@@ -228,23 +215,23 @@ function validarFormularioRegistro(e) {
     }
 
     // 4. Validar Correo Electrónico
-    const emailElement = document.getElementById("email");
+    const emailElement = document.getElementById("reg-email");
     if (emailElement) {
         const email = emailElement.value.trim().toLowerCase();
+        const regexCorreoDuoc = /^[a-zA-Z0-9._%+-]+@duoc(uc)?\.cl$/i;
+
         if (email === "") {
-            mostrarError("email", "El correo electrónico es obligatorio.");
+            mostrarError("reg-email", "El correo electrónico es obligatorio.");
             esValido = false;
         } else if (email.length > 100) {
-            mostrarError("email", "El correo no puede superar los 100 caracteres.");
+            mostrarError("reg-email", "El correo no puede superar los 100 caracteres.");
             esValido = false;
-        } else if (!validarCorreoConDominio(email, ["inacap.cl", "profesor.inacap.cl", "gmail.com", "duocuc.cl", "alumnos.duoc.cl"])) {
-            mostrarError("email", "Correo no permitido. Dominios válidos: @inacap.cl, @duocuc.cl, @alumnos.duoc.cl o @gmail.com.");
+        } else if (!regexCorreoDuoc.test(email)) {
+            alert("Error: Debes registrarte utilizando un correo institucional válido (@duoc.cl o @duocuc.cl).");
+            mostrarError("reg-email", "Debes usar un correo institucional (@duoc.cl o @duocuc.cl).");
             esValido = false;
         } else {
-            // Evaluar si califica para el descuento del 20%
-            if (email.endsWith("@duocuc.cl") || email.endsWith("@alumnos.duoc.cl")) {
-                esComunidadDuoc = true;
-            }
+            esComunidadDuoc = true;
         }
     }
 
@@ -261,12 +248,12 @@ function validarFormularioRegistro(e) {
         }
     }
 
-    // 6. Validar Fecha de Nacimiento (Mayoría de edad +18)
-    const fechaInput = document.getElementById("fecha-nacimiento");
+    // 6. Validar Fecha de Nacimiento
+    const fechaInput = document.getElementById("reg-fecha-nacimiento");
     if (fechaInput) {
         const fechaNacimientoInput = fechaInput.value;
         if (fechaNacimientoInput === "") {
-            mostrarError("fecha", "La fecha de nacimiento es obligatoria.");
+            mostrarError("reg-fecha", "La fecha de nacimiento es obligatoria.");
             esValido = false;
         } else {
             const partes = fechaNacimientoInput.split('-');
@@ -279,11 +266,11 @@ function validarFormularioRegistro(e) {
             const mesDiferencia = hoy.getMonth() - mesNac;
 
             if (mesDiferencia < 0 || (mesDiferencia === 0 && hoy.getDate() < diaNac)) {
-                edad--;
+                 edad--;
             }
 
             if (edad < 18) {
-                mostrarError("fecha", `Debes ser mayor de 18 años para registrarte. Tu edad actual es ${edad} años.`);
+                mostrarError("reg-fecha", `Debes ser mayor de 18 años para registrarte. Tu edad actual es ${edad} años.`);
                 esValido = false;
             }
         }
@@ -319,22 +306,38 @@ function validarFormularioRegistro(e) {
         }
     }
 
-    // Guardado y procesamiento al completar con éxito
+    // ==========================================================================
+    // EXTENSIÓN: PROCESAMIENTO DE REFERIDOS Y GAMIFICACIÓN AL COMPLETAR REGISTRO
+    // ==========================================================================
     if (esValido) {
+        const codigoReferidoInput = document.getElementById("codigo-referido");
+        const codigoClean = codigoReferidoInput ? codigoReferidoInput.value.trim() : "";
+        
+        let puntosIniciales = 0;
+        let nivelInicial = "Nivel 1 (Noob)";
+
+        if (codigoClean !== "") {
+            puntosIniciales = 200; 
+            nivelInicial = "Nivel 2 (Explorer)"; 
+        }
+
         const datosUsuario = {
-            run: runElement.value.trim(),
-            nombre: nombreElement.value.trim(),
-            email: emailElement.value.trim().toLowerCase(),
+            run: runElement ? runElement.value.trim() : "12345678K",
+            nombre: nombreElement ? nombreElement.value.trim().toUpperCase() : "NUEVO GAMER",
+            apellidos: apellidosElement ? apellidosElement.value.trim().toUpperCase() : "",
+            email: emailElement ? emailElement.value.trim().toLowerCase() : "",
             aplicaDescuentoEspecial: esComunidadDuoc,
-            puntosLevelUp: 0
+            puntosLevelUp: puntosIniciales,
+            nivelGamer: nivelInicial
         };
 
+        localStorage.removeItem("isAdmin");
         localStorage.setItem("usuarioActivo", JSON.stringify(datosUsuario));
 
-        if (esComunidadDuoc) {
-            alert("¡Registro exitoso! Se ha detectado tu correo institucional de Duoc. Tu beneficio del 20% de descuento vitalicio ha sido configurado.");
+        if (puntosIniciales > 0) {
+            alert(`🎉 ¡Registro exitoso, ${datosUsuario.nombre}!\n\nCódigo de referido detectado. Has desbloqueado el "${datosUsuario.nivelGamer}" y abonamos +200 Puntos LevelUp a tu inventario.`);
         } else {
-            alert("¡Registro exitoso! Bienvenido a Level-Up Gamer. Ahora puedes iniciar sesión.");
+            alert(`🎮 ¡Registro exitoso, ${datosUsuario.nombre}! Bienvenido a Level-Up Gamer.`);
         }
 
         document.getElementById("form-registro").reset();
@@ -356,52 +359,38 @@ function actualizarContadorCaracteres(e) {
 
 function validarFormularioContacto(e) {
     e.preventDefault();
-
-    limpiarErrores(["contacto-nombre", "contacto-correo", "contacto-comentario"]);
     let esValido = true;
 
-    const nombreElement = document.getElementById("contacto-nombre");
-    if (nombreElement) {
-        const nombre = nombreElement.value.trim();
-        if (nombre === "") {
-            mostrarError("contacto-nombre", "El nombre completo es requerido.");
-            esValido = false;
-        } else if (nombre.length > 100) {
-            mostrarError("contacto-nombre", "El nombre no puede superar los 100 caracteres.");
-            esValido = false;
-        }
+    const nombreElement = document.getElementById("nombre");
+    const correoElement = document.getElementById("email");
+    const asuntoElement = document.getElementById("asunto");
+    const comentarioElement = document.getElementById("mensaje");
+
+    const nombre = nombreElement ? nombreElement.value.trim() : "";
+    const correo = correoElement ? correoElement.value.trim() : "";
+    const asunto = asuntoElement ? asuntoElement.value.trim() : "";
+    const comentario = comentarioElement ? comentarioElement.value.trim() : "";
+
+    if (nombre === "" || correo === "" || asunto === "" || comentario === "") {
+        alert("⚠️ Por favor, rellena todos los campos del formulario antes de enviar.");
+        return;
     }
 
-    const correoElement = document.getElementById("contacto-correo");
-    if (correoElement) {
-        const correo = correoElement.value.trim();
-        if (correo === "") {
-            mostrarError("contacto-correo", "El correo electrónico es requerido.");
-            esValido = false;
-        } else if (!validarCorreoConDominio(correo, ["inacap.cl", "profesor.inacap.cl", "gmail.com", "duocuc.cl", "alumnos.duoc.cl"])) {
-            mostrarError("contacto-correo", "Solo se aceptan correos válidos de la comunidad o gmail.");
-            esValido = false;
-        }
+    if (nombre.length > 100 || comentario.length > 500) {
+        alert("⚠️ El nombre (máx 100) o el mensaje (máx 500) exceden el límite permitido.");
+        return;
     }
 
-    const comentarioElement = document.getElementById("contacto-comentario");
-    if (comentarioElement) {
-        const comentario = comentarioElement.value.trim();
-        if (comentario === "") {
-            mostrarError("contacto-comentario", "El comentario o mensaje es requerido.");
-            esValido = false;
-        } else if (comentario.length > 500) {
-            mostrarError("contacto-comentario", "El mensaje no puede exceder los 500 caracteres.");
-            esValido = false;
-        }
+    if (!validarCorreoConDominio(correo, ["inacap.cl", "profesor.inacap.cl", "gmail.com", "duoc.cl", "duocuc.cl", "alumnos.duoc.cl"])) {
+        alert("⚠️ Solo se aceptan correos válidos de la comunidad (Inacap, Duoc) o Gmail.");
+        return;
     }
 
-    if (esValido) {
-        alert("¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.");
-        document.getElementById("form-contacto").reset();
-        const currentCharsElement = document.getElementById("current-chars");
-        if (currentCharsElement) currentCharsElement.textContent = "0";
-    }
+    alert(`🎮 ¡Mensaje Recibido, ${nombre.toUpperCase()}!\nHemos registrado tu consulta sobre "${asunto}". Nos comunicaremos contigo pronto.`);
+    document.getElementById("form-contacto").reset();
+    
+    const currentCharsElement = document.getElementById("current-chars");
+    if (currentCharsElement) currentCharsElement.textContent = "0";
 }
 
 /* ==========================================================================

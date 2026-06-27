@@ -12,7 +12,7 @@
         <div class="header-container">
             <a href="../../index.html" class="logo-container">
                 <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
-                <span class="logo-text">LEVEL-UP GAMER</span>
+                <span class="logo-text"></span>
             </a>
 
             <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
@@ -44,60 +44,131 @@
             <p>Haz clic en cualquier producto para ver su detalle técnico y descripción completa.</p>
         </section>
 
-        <section class="products-grid" id="grid-productos">
-            <!-- Las tarjetas se generan dinámicamente desde el catálogo en productos.js -->
+        <section class="filter-container">
+            <div class="search-wrapper">
+                <input type="text" id="search-input" placeholder="¿Qué estás buscando hoy?">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="category-wrapper">
+                <select id="category-select">
+                    <option value="all">Ver todo el catálogo</option>
+                    <option value="Computadores Gamers">Computadores Gamers</option>
+                    <option value="Consolas">Consolas</option>
+                    <option value="Sillas Gamers">Sillas Gamers</option>
+                    <option value="Mouse">Mouse</option>
+                    <option value="Mousepad">Mousepad</option>
+                    <option value="Accesorios">Accesorios</option>
+                    <option value="Juegos de Mesa">Juegos de Mesa</option>
+                    <option value="Poleras Personalizadas">Poleras Personalizadas</option>
+                    <option value="Servicio Técnico">Servicio Técnico</option>
+                </select>
+            </div>
         </section>
+
+        <section class="products-grid" id="grid-productos"></section>
     </main>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 Level-Up Gamer - Todos los derechos reservados. Evaluación Académica.</p>
-    </footer>
+    <!-- CONTENEDOR ÚNICO: JavaScript se encargará de renderizar la grilla simétrica aquí -->
+    <footer id="global-footer" class="main-footer"></footer>
+    
+
+    <!-- Botón Flotante de Soporte Técnico vía WhatsApp -->
+    <a href="https://wa.me/56912345678?text=%C2%A1Hola%20Level-Up%20Gamer%21%20Necesito%20asistencia%20con%20el%20servicio%20t%C3%A9cnico." 
+       class="whatsapp-btn" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       aria-label="Contactar a Servicio Técnico en WhatsApp">
+        <span class="whatsapp-icon">💬</span>
+        <span class="whatsapp-text">Soporte Técnico</span>
+    </a>
 
     <script src="../js/productos.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/main.js"></script>
+    
     <script>
-        // Renderiza la grilla completa del catálogo (todos los productos, no solo destacados)
         document.addEventListener("DOMContentLoaded", () => {
             const grid = document.getElementById("grid-productos");
-            window.catalogoHardware.forEach(prod => {
-                const card = document.createElement("div");
-                card.className = "product-card";
-                card.dataset.codigo = prod.codigo;
-                card.innerHTML = `
-                    <div class="product-badge">${prod.categoria}</div>
-                    <div class="product-img-container" style="cursor:pointer;">
-                        <img src="${prod.imagen}" alt="${prod.titulo}" onerror="this.src='https://via.placeholder.com/250x200?text=Hardware+Image'">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title" style="cursor:pointer;">${prod.titulo}</h3>
-                        <div class="product-price-row">
-                            <span class="product-price">${prod.precio}</span>
-                            <button class="btn-add-cart" data-codigo="${prod.codigo}">Añadir 🛒</button>
+            const searchInput = document.getElementById("search-input");
+            const categorySelect = document.getElementById("category-select");
+
+            function renderProductos(textoBusqueda = "", categoriaSeleccionada = "all") {
+                grid.innerHTML = "";
+                const textoClean = textoBusqueda.toLowerCase().trim();
+
+                const productosFiltrados = window.catalogoHardware.filter(prod => {
+                    const coincideTexto = prod.titulo.toLowerCase().includes(textoClean);
+                    const coincideCategoria = categoriaSeleccionada === "all" || prod.categoria === categoriaSeleccionada;
+                    return coincideTexto && coincideCategoria;
+                });
+
+                if (productosFiltrados.length === 0) {
+                    grid.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; color: #8e8ea8;">
+                            <p style="font-size: 1.2rem; margin-bottom: 10px;">🎮 No encontramos productos que coincidan.</p>
+                            <p style="font-size: 0.9rem; opacity: 0.7;">Intenta cambiando los criterios de búsqueda.</p>
                         </div>
-                    </div>
-                `;
-                grid.appendChild(card);
+                    `;
+                    return;
+                }
+
+                productosFiltrados.forEach(prod => {
+                    const card = document.createElement("div");
+                    card.className = "product-card";
+                    card.dataset.codigo = prod.codigo;
+                    card.innerHTML = `
+                        <div class="product-badge">${prod.categoria}</div>
+                        <div class="product-img-container" style="cursor:pointer;">
+                            <img src="${prod.imagen}" alt="${prod.titulo}" onerror="this.src='https://via.placeholder.com/250x200?text=Hardware+Image'">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title" style="cursor:pointer;">${prod.titulo}</h3>
+                            <div class="product-price-row">
+                                <span class="product-price">${prod.precio}</span>
+                                <button class="btn-add-cart" data-codigo="${prod.codigo}">Añadir 🛒</button>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                enlazarEventosTarjetas();
+            }
+
+            function enlazarEventosTarjetas() {
+                grid.querySelectorAll(".product-card").forEach(card => {
+                    const codigo = card.dataset.codigo;
+                    
+                    card.querySelector(".product-img-container").addEventListener("click", () => {
+                        window.location.href = `producto-detalle.html?codigo=${codigo}`;
+                    });
+                    
+                    card.querySelector(".product-title").addEventListener("click", () => {
+                        window.location.href = `producto-detalle.html?codigo=${codigo}`;
+                    });
+                });
+
+                grid.querySelectorAll(".btn-add-cart").forEach(btn => {
+                    btn.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        if (typeof agregarAlCarrito === "function") {
+                            agregarAlCarrito(btn.dataset.codigo);
+                        } else {
+                            console.error("Falta vincular cart.js o la función agregarAlCarrito");
+                        }
+                    });
+                });
+            }
+
+            searchInput.addEventListener("input", () => {
+                renderProductos(searchInput.value, categorySelect.value);
             });
 
-            // Clic en la tarjeta (imagen o título) => redirige al detalle del producto
-            grid.querySelectorAll(".product-card").forEach(card => {
-                const codigo = card.dataset.codigo;
-                card.querySelector(".product-img-container").addEventListener("click", () => {
-                    window.location.href = `producto-detalle.html?codigo=${codigo}`;
-                });
-                card.querySelector(".product-title").addEventListener("click", () => {
-                    window.location.href = `producto-detalle.html?codigo=${codigo}`;
-                });
+            categorySelect.addEventListener("change", () => {
+                renderProductos(searchInput.value, categorySelect.value);
             });
 
-            // Clic en "Añadir" => usa el carrito único (cart.js), sin navegar
-            grid.querySelectorAll(".btn-add-cart").forEach(btn => {
-                btn.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    agregarAlCarrito(btn.dataset.codigo);
-                });
-            });
+            renderProductos();
         });
     </script>
 </body>

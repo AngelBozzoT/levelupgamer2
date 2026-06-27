@@ -15,7 +15,9 @@ window.catalogoHardware = [
         precioNumerico: 29990,
         imagen: "https://i5.walmartimages.com/asr/a1863816-7553-441d-ad37-734a716ed55a.00a63b9153c188bd583dbfd05b191f90.jpeg",
         descripcion: "El célebre juego de estrategia, negociación y colonización. Reúne materias primas, construye pueblos y expande tus dominios para convertirte en el soberano de la isla.",
-        destacado: true
+        destacado: true,
+        marca: "Devir",
+        origen: "Alemania (Importación Oficial)"
     },
     {
         codigo: "JM002",
@@ -25,7 +27,9 @@ window.catalogoHardware = [
         precioNumerico: 24990,
         imagen: "https://i5.walmartimages.cl/asr/5e0f858c-e687-4f05-8726-ac9a2d46296c.7c1b8264366f4112b169ce70a23e8531.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
         descripcion: "Un juego clásico de tablero moderno. Crea tu propio mapa medieval loseta a loseta, desplegando a tus seguidores como caballeros, bandidos, monjes o campesinos para sumar puntos de victoria.",
-        destacado: false
+        destacado: false,
+        marca: "Devir",
+        origen: "Alemania (Importación Oficial)"
     },
     {
         codigo: "AC001",
@@ -35,7 +39,9 @@ window.catalogoHardware = [
         precioNumerico: 59990,
         imagen: "https://i5.walmartimages.cl/asr/e53427b4-1133-4a53-93c8-9774f0385073.ad9f942fce2f82f3b36e538ba0c8dd5b.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
         descripcion: "Experimenta el diseño modernizado del mando inalámbrico de Xbox, con superficies esculpidas y geometría refinada para una mayor comodidad. Totalmente compatible con consolas Xbox, PC y dispositivos móviles.",
-        destacado: true
+        destacado: true,
+        marca: "Microsoft",
+        origen: "Estados Unidos (Distribución Autorizada)"
     },
     {
         codigo: "AC002",
@@ -45,7 +51,9 @@ window.catalogoHardware = [
         precioNumerico: 79990,
         imagen: "https://http2.mlstatic.com/D_NQ_NP_953165-CBT112200835901_052026-O.webp",
         descripcion: "Proporcionan un sonido envolvente de alta fidelidad virtual 7.1 con un micrófono desmontable con cancelación de ruido y almohadillas de espuma viscoelástica para una comodidad insuperable.",
-        destacado: false
+        destacado: false,
+        marca: "HyperX",
+        origen: "Estados Unidos (Partner Oficial Chile)"
     },
     {
         codigo: "CO001",
@@ -55,7 +63,9 @@ window.catalogoHardware = [
         precioNumerico: 549990,
         imagen: "https://media.solotodo.com/media/products/1979309_picture_1731571228.jpg",
         descripcion: "La potente consola de última generación de Sony, que ofrece trazado de rayos para gráficos fotorrealistas, SSD de velocidad ultra alta para tiempos de carga mínimos y audio 3D inmersivo.",
-        destacado: true
+        destacado: true,
+        marca: "Sony",
+        origen: "Japón (Distribuidor Oficial Sony Chile)"
     },
     {
         codigo: "CG001",
@@ -65,7 +75,9 @@ window.catalogoHardware = [
         precioNumerico: 1299990,
         imagen: "https://media.spdigital.cl/thumbnails/products/ygse9ue7_b405ce7d_thumbnail_512.jpg",
         descripcion: "Un potente equipo de escritorio optimizado para esports y streaming, equipado con hardware de vanguardia para asegurar altos FPS estables y refrigeración térmica inteligente de nivel premium.",
-        destacado: false
+        destacado: false,
+        marca: "ASUS ROG",
+        origen: "Taiwán (Garantía de Fábrica Extendida)"
     },
     {
         codigo: "SG001",
@@ -75,7 +87,9 @@ window.catalogoHardware = [
         precioNumerico: 349990,
         imagen: "https://m.media-amazon.com/images/I/410uYasNqFL._AC_UF894,1000_QL80_.jpg",
         descripcion: "Silla ergonómica galardonada mundialmente, construida con materiales de alta calidad que entregan un soporte lumbar ajustable integrado y adaptabilidad absoluta para extensas jornadas.",
-        destacado: false
+        destacado: false,
+        marca: "Secretlab",
+        origen: "Singapur (Importación Directa Premium)"
     },
     {
         codigo: "MS001",
@@ -85,7 +99,9 @@ window.catalogoHardware = [
         precioNumerico: 49990,
         imagen: "https://media.spdigital.cl/thumbnails/products/snbujg5__29f7dd61_thumbnail_4096.jpg",
         descripcion: "Equipado con el sensor óptico avanzado HERO 25K, 11 botones completamente programables, pesas ajustables individuales y tecnología de iluminación RGB LIGHTSYNC personalizable.",
-        destacado: true
+        destacado: true,
+        marca: "Logitech G",
+        origen: "Suiza (SKU Nacional Verificado)"
     },
     {
         codigo: "MP001",
@@ -95,7 +111,9 @@ window.catalogoHardware = [
         precioNumerico: 29990,
         imagen: "https://prophonechile.cl/wp-content/uploads/2023/02/goliathusex.png",
         descripcion: "Superficie de tela microtexturizada de tamaño extendido optimizada para todos los sensores de mouse. Ofrece bordes iluminados por ecosistema RGB Razer Chroma con sincronización.",
-        destacado: false
+        destacado: false,
+        marca: "Razer",
+        origen: "Estados Unidos (Partner Autorizado)"
     },
     {
         codigo: "PP001",
@@ -105,7 +123,9 @@ window.catalogoHardware = [
         precioNumerico: 14990,
         imagen: "../assets/polera_levelup.png",
         descripcion: "Camiseta confeccionada en algodón premium transpirable de alta comodidad. Incluye la personalización exclusiva de tu Gamertag o logotipo en alta definición para eventos y streams.",
-        destacado: false
+        destacado: false,
+        marca: "Level-Up Confecciones",
+        origen: "Santiago, Chile (Fabricación Nacional Local)"
     }
 ];
 
@@ -127,3 +147,41 @@ window.catalogoHardware = [
         });
     }
 })();
+// ==========================================================================
+// FILTRADO AVANZADO DE CATÁLOGO (Categorías Oficiales Pauta)
+// ==========================================================================
+function filtrarCatalogoGamer(listaProductos, categoriaSeleccionada, precioMaximo = Infinity) {
+    // Retorna la lista filtrada combinando los criterios exigidos
+    return listaProductos.filter(producto => {
+        // 1. Filtro por Categoría Exacta
+        const cumpleCategoria = (categoriaSeleccionada === "todos" || producto.categoria === categoriaSeleccionada);
+        
+        // 2. Filtro por Rango de Precio (Filtro avanzado)
+        const cumplePrecio = producto.precio <= precioMaximo;
+        
+        return cumpleCategoria && cumplePrecio;
+    });
+}
+
+// Ejemplo de cómo conectar los elementos de tu interfaz (Selects o Inputs)
+document.addEventListener("DOMContentLoaded", () => {
+    const filtroCategoria = document.getElementById("filtro-categoria"); // ID de tu select de categorías
+    const filtroPrecio = document.getElementById("filtro-precio");       // ID de tu input/range de precio
+    
+    if (filtroCategoria && filtroPrecio) {
+        const aplicarFiltros = () => {
+            const cat = filtroCategoria.value;
+            const precio = parseFloat(filtroPrecio.value) || Infinity;
+            
+            // Asumiendo que 'misProductos' es tu array global de objetos
+            const productosFiltrados = filtrarCatalogoGamer(misProductos, cat, precio);
+            
+            // Aquí llamas a tu función existente que dibuja las tarjetas en el HTML
+            renderizarTarjetasProductos(productosFiltrados);
+        };
+
+        filtroCategoria.addEventListener("change", aplicarFiltros);
+        filtroPrecio.addEventListener("input", aplicarFiltros);
+    }
+});
+

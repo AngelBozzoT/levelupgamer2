@@ -12,7 +12,7 @@
         <div class="header-container">
             <a href="../../index.html" class="logo-container">
                 <img src="../assets/Logo.png" alt="Level-Up Gamer Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/70x70/101026/ffffff?text=Logo'">
-                <span class="logo-text">LEVEL-UP GAMER</span>
+                <span class="logo-text"></span>
             </a>
 
             <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
@@ -39,8 +39,7 @@
     </header>
 
     <main class="main-content">
-        <a href="productos.html" class="link-back" style="display:inline-block; margin-bottom:20px;">&larr; Volver al catálogo</a>
-
+        <a href="productos.html" class="link-back" style="display:inline-block; margin-bottom:20px; color: #ffffff; text-decoration: none; font-weight: bold;">&larr; Volver al catálogo</a>
         <section id="detalle-contenedor" class="detalle-producto-container">
             <p class="loading-text">Cargando producto...</p>
         </section>
@@ -50,11 +49,52 @@
             <p class="muted-text">El producto que buscas no existe o el enlace es inválido.</p>
             <a href="productos.html" class="btn-submit" style="display:inline-block; margin-top:20px; text-decoration:none; width:auto; padding:12px 30px;">Ver catálogo completo</a>
         </section>
+
+        <!-- ================================================================== -->
+        <!-- SECCIÓN DE RESEÑAS DINÁMICAS (Corregida y recuperada)               -->
+        <!-- ================================================================== -->
+        <section class="reviews-section" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            <h2 class="reviews-title" style="font-size: 1.6rem; font-weight: 800; letter-spacing: 2px; color: #ffffff; margin-bottom: 30px;">RESEÑAS DEL PRODUCTO</h2>
+            
+            <!-- FORMULARIO PARA CREAR RESEÑA (Limpio de onsubmit inline) -->
+            <div class="review-form-container" style="background: #07070c; padding: 25px; border-radius: 10px; margin-bottom: 40px; border: 1px solid rgba(0, 132, 255, 0.15);">
+                <h3 style="color: #fff; margin-top: 0; margin-bottom: 15px; font-size: 1.2rem;">Deja tu Opinión del Componente</h3>
+                <form id="form-nueva-reseña">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; color: #aaa; margin-bottom: 5px; font-size: 0.9rem;">Tu Nombre Gamer:</label>
+                        <input type="text" id="review-username" required style="width: 100%; padding: 10px; background: #13131a; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; color: #aaa; margin-bottom: 5px; font-size: 0.9rem;">Puntuación:</label>
+                        <select id="review-stars" style="width: 100%; padding: 10px; background: #13131a; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box;">
+                            <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ (Excelente)</option>
+                            <option value="⭐⭐⭐⭐">⭐⭐⭐⭐ (Muy Bueno)</option>
+                            <option value="⭐⭐⭐">⭐⭐⭐ (Bueno)</option>
+                            <option value="⭐⭐">⭐⭐ (Regular)</option>
+                            <option value="⭐">⭐ (Malo)</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; color: #aaa; margin-bottom: 5px; font-size: 0.9rem;">Tu Comentario:</label>
+                        <textarea id="review-comment" rows="3" required style="width: 100%; padding: 10px; background: #13131a; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box; resize: vertical;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit" style="width: auto; padding: 10px 25px;">Publicar Reseña</button>
+                </form>
+            </div>
+
+            <!-- CONTENEDOR ESENCIAL DONDE SE PINTARÁN LAS RESEÑAS -->
+            <div class="reviews-grid" id="reviews-container">
+                <!-- Las reseñas del LocalStorage aparecerán de forma dinámica aquí -->
+            </div>
+        </section>
     </main>
 
-    <footer class="main-footer">
-        <p>&copy; 2026 Level-Up Gamer. Todos los derechos reservados. Desarrollado para Evaluación Web.</p>
-    </footer>
+    <!-- CONTENEDOR ÚNICO: JavaScript se encargará de renderizar la grilla simétrica aquí -->
+    <footer id="global-footer" class="main-footer"></footer>
+    
 
     <script src="../js/productos.js"></script>
     <script src="../js/cart.js"></script>
@@ -85,8 +125,22 @@
                         <span class="product-badge" style="position:static; display:inline-block; margin-bottom:10px;">${producto.categoria}</span>
                         <h1>${producto.titulo}</h1>
                         <p class="detalle-codigo">Código: ${producto.codigo}</p>
+
+                        <!-- ================================================================== -->
+                        <!-- SECCIÓN COMPLETAMENTE DINÁMICA DE MARCA Y ORIGEN (PUNTO 9 RÚBRICA)  -->
+                        <!-- ================================================================== -->
+                        <div class="origen-container" style="background: rgba(0, 132, 255, 0.05); border-left: 3px solid #0084ff; padding: 12px 15px; margin: 15px 0; border-radius: 0 5px 5px 0;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #ccc;">
+                                🏷️ <strong style="color: #fff;">Marca / Fabricante:</strong> ${producto.marca || 'Generic'}
+                            </p>
+                            <p style="margin: 6px 0 0 0; font-size: 0.9rem; color: #ccc;">
+                                🌐 <strong style="color: #fff;">Procedencia:</strong> ${producto.origen || 'Importación General'}
+                            </p>
+                        </div>
+                        <!-- ================================================================== -->
+
                         <p class="detalle-descripcion">${producto.descripcion}</p>
-                        <p class="detalle-precio">${producto.precio}</p>
+                        <p class="detalle-precio" style="font-size: 1.8rem; color: #00d2ff; font-weight: 800; margin: 15px 0;">${producto.precio}</p>
 
                         <div class="detalle-cantidad-row">
                             <label for="cantidad-input">Cantidad:</label>
@@ -98,10 +152,26 @@
                         </div>
 
                         <button id="btn-add-detalle" class="btn-submit" style="margin-top:20px;">Añadir al Carrito 🛒</button>
+
+                        <!-- COMPARTIR EN REDES SOCIALES (PUNTO 5) -->
+                        <div class="share-container" style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                            <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 10px; letter-spacing: 1px;">COMPARTIR CON TU SQUAD:</p>
+                            <div class="share-buttons" style="display: flex; gap: 10px;">
+                                <a href="https://twitter.com/intent/tweet?text=Mira%20este%20componente%20en%20Level-Up%20Gamer:%20${encodeURIComponent(producto.titulo)}" target="_blank" class="share-btn twitter" style="background: #1da1f2; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 5px; transition: opacity 0.2s;">
+                                    𝕏 Twitter
+                                </a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank" class="share-btn facebook" style="background: #1877f2; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 5px; transition: opacity 0.2s;">
+                                    📘 Facebook
+                                </a>
+                                <a href="https://api.whatsapp.com/send?text=Mira%20este%20pedazo%20de%20hardware%20en%20Level-Up%20Gamer:%20${encodeURIComponent(producto.titulo)}%20-%20${encodeURIComponent(window.location.href)}" target="_blank" class="share-btn whatsapp" style="background: #25d366; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 5px; transition: opacity 0.2s;">
+                                    💬 WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             `;
-
             let cantidadSeleccionada = 1;
             const spanCantidad = document.getElementById("cantidad-input");
 
@@ -120,6 +190,19 @@
             document.getElementById("btn-add-detalle").addEventListener("click", () => {
                 agregarAlCarrito(producto.codigo, cantidadSeleccionada);
             });
+
+            // ==================================================================
+            // ENLACE DIRECTO SEGURO PARA PUBLICACIÓN Y CARGA DE RESEÑAS
+            // ==================================================================
+            const formReseña = document.getElementById("form-nueva-reseña");
+            if (formReseña && typeof window.guardarReseña === "function") {
+                formReseña.addEventListener("submit", window.guardarReseña);
+            }
+
+            // Forzar recarga inicial en caso de que main.js haya corrido antes del render
+            if (typeof cargarReseñasExistentes === "function") {
+                cargarReseñasExistentes();
+            }
         });
     </script>
 </body>

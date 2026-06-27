@@ -333,14 +333,16 @@
 }
 
 .link-back {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    color: #888;
+    color: #f9fbfc; /* Un azul mucho más brillante que el de fábrica */
     text-decoration: none;
-    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
 }
 
+.link-back:hover {
+    color: #ffffff; /* Se ilumina en celeste neón al pasar el cursor */
+    text-shadow: 0 0 8px rgba(0, 210, 255, 0.6);
+}
 /* Columnas generales de la página de Carrito */
 .carrito-items-section,
 .carrito-summary-section {
@@ -368,7 +370,7 @@
     text-align: center;
     padding: 60px 20px;
     color: var(--texto-mutado);
-    background: #0b0b12;
+    background: #000000;
     border: 1px dashed rgba(255, 255, 255, 0.15);
     border-radius: 8px;
 }
@@ -381,7 +383,7 @@
 .btn-continuar {
     display: inline-block;
     background: var(--azul-electrico);
-    color: #05050f;
+    color: #000000;
     padding: 12px 28px;
     border-radius: 5px;
     text-decoration: none;
@@ -391,4 +393,239 @@
 
 .btn-continuar:hover {
     box-shadow: 0 0 15px var(--azul-electrico);
+}
+/* ==========================================================================
+   ESTILOS PARA CONTROLES DE BÚSQUEDA Y FILTROS (CATÁLOGO) - CORREGIDO
+   ========================================================================== */
+
+/* Cambiado de .filtros-seccion a .filter-container para que haga match con tu HTML */
+.filter-container {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0 30px 0;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Envoltura para el buscador */
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Posicionamiento de la lupa dentro del wrapper */
+.search-wrapper .search-icon {
+    position: absolute;
+    right: 15px;
+    color: var(--azul-electrico);
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+/* Estilo base unificado usando tus variables globales */
+.filter-container input[type="text"],
+.filter-container select,
+.game-input {
+    background-color: #0b0b1a; /* Fondo ultra oscuro a tono con el header */
+    color: #FFFFFF; /* Texto principal blanco */
+    border: 2px solid var(--azul-electrico); /* Usando tu variable de azul */
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-family: sans-serif; 
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+    min-width: 240px;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.2);
+}
+
+/* Espaciado extra al buscador para no tapar la lupa */
+.filter-container input[type="text"] {
+    padding-right: 40px;
+}
+
+/* Efecto Hover e Inserción de foco (Efecto Neón Activo) */
+.filter-container input[type="text"]:focus,
+.filter-container select:focus {
+    border-color: var(--verde-neon); /* Cambia a Verde Neón de tu variable */
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.6); /* Brillo gamer de acento */
+    background-color: #101026;
+}
+
+/* Ajuste estético para las flechas del selector */
+.filter-container select {
+    cursor: pointer;
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231E90FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+.filter-container select:focus {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2339FF14' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+}
+
+/* ==========================================================================
+   BOTÓN FLOTANTE DE WHATSAPP (SERVICIO TÉCNICO)
+   ========================================================================== */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #0b0b1a; 
+    border: 2px solid var(--verde-neon); /* Sincronizado con tus variables */
+    color: #FFFFFF; 
+    padding: 12px 18px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: var(--fuente-titulos), sans-serif; /* Usa tu fuente de títulos si está activa */
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4); 
+    z-index: 9999; 
+    transition: all 0.3s ease;
+}
+
+/* Efecto Gamer al pasar el mouse por encima (Hover) */
+.whatsapp-btn:hover {
+    background-color: var(--verde-neon); 
+    color: #000000; 
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.8); 
+    transform: translateY(-5px); 
+}
+
+.whatsapp-btn .whatsapp-icon {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 480px) {
+    .whatsapp-btn .whatsapp-text {
+        display: none;
+    }
+    .whatsapp-btn {
+        padding: 12px;
+        border-radius: 50%;
+    }
+}
+/* ==========================================================================
+   TARJETAS DE ANUNCIOS Y PRÓXIMOS PRODUCTOS (HOME)
+   ========================================================================== */
+.anuncio-card {
+    background-color: #0b0b1a; /* Fondo oscuro integrado */
+    border: 1px solid rgba(30, 144, 255, 0.15);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.anuncio-card:hover {
+    border-color: #39FF14; /* Transición interactiva a Verde Neón */
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+    transform: translateY(-4px);
+}
+
+.anuncio-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #ff3333; /* Rojo de alerta de expectación */
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    box-shadow: 0 0 8px rgba(255, 51, 51, 0.4);
+}
+
+.anuncio-img-placeholder {
+    height: 200px; /* Incrementamos ligeramente la altura para que luzca mejor el hardware */
+    background: radial-gradient(circle, #000000 0%, #000000 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.082);
+    overflow: hidden; /* Evita que cualquier residuo de la imagen se salga del borde */
+}
+.anuncio-img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta y centra la imagen automáticamente para que no se deforme */
+    object-position: center; /* Asegura que el enfoque se mantenga en el medio de la fotografía */
+}
+.anuncio-icon {
+    font-size: 2.5rem;
+    position: absolute;
+    opacity: 0.8;
+}
+
+.anuncio-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.anuncio-body h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.15rem;
+    color: #ffffff;
+    font-family: sans-serif;
+}
+
+.anuncio-body p {
+    margin: 0 0 20px 0;
+    font-size: 0.88rem;
+    color: #8e8ea8;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.anuncio-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    gap: 10px;
+}
+
+.anuncio-fecha {
+    font-size: 0.8rem;
+    color: var(--azul-electrico);
+    font-weight: 600;
+}
+
+.btn-anuncio-notificar {
+    background-color: transparent;
+    border: 1px solid var(--azul-electrico);
+    color: var(--azul-electrico);
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.btn-anuncio-notificar:hover {
+    background-color: var(--azul-electrico);
+    color: #000000;
+    box-shadow: 0 0 10px var(--azul-electrico);
 }
