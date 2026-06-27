@@ -4,6 +4,7 @@ Tienda online de productos para gamers en Chile, desarrollada como proyecto acad
 
 ## 📁 Estructura del proyecto
 
+```text
 levelupgamer2/
 ├── index.html                     # Página principal (Home + Anuncio de Lanzamientos)
 ├── src/
@@ -35,8 +36,6 @@ levelupgamer2/
 │       ├── datos_admin.js         # Datos semilla y render de tablas del admin
 │       └── validaciones_admin.js  # Validaciones y CRUD del panel administrativo
 └── README.md
-
-
 ## 🛒 Carrito de compras y Convenios
 
 El carrito usa una única fuente de verdad (`src/js/cart.js` + `localStorage`), por lo que se mantiene sincronizado en toda la plataforma. Adicionalmente, cuenta con un discriminador de correos institucionales que aplica de manera automática un **descuento del 20% para DUOC UC o 12% para INACAP** al procesar el pago.
